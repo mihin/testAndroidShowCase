@@ -75,10 +75,6 @@ class MealsByBeersActivity : BaseActivity() {
             beersAdapter.updateAdapter(it.toMutableList())
 
             recycler_view_beers.setHasFixedSize(true)
-
-            beersModel.forEach {
-                Log.i("test", "id beer = ${it.id}")
-            }
         }
     }
 

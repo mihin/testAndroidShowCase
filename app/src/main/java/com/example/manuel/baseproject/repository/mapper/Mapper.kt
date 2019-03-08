@@ -29,7 +29,6 @@ class Mapper private constructor() {
             val beersModelResultWrapper: ResultWrapper<List<BeerModel>> = ResultWrapper.success(beersModel)
 
             beersResponseResultWrapper.data?.forEach {
-                Log.i("test", it.name)
                 beersModel.add(
                         BeerModel(
                                 id = it.id,
