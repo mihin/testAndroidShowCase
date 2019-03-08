@@ -5,7 +5,7 @@ import com.example.manuel.baseproject.repository.MealsByBeersRepository
 import com.example.manuel.baseproject.repository.MealsByBeersRepositoryImpl
 import com.example.manuel.baseproject.repository.datasource.MealsByBeersNetworkDatasource
 import com.example.manuel.baseproject.repository.datasource.retrofit.RetrofitConfiguration
-import com.example.manuel.baseproject.vm.MainActivityViewModel
+import com.example.manuel.baseproject.vm.MealsByBeersViewModel
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
@@ -19,7 +19,7 @@ class KodeinContainers {
             bind<MealsByBeersNetworkDatasource>() with provider { MealsByBeersNetworkDatasource(instance()) }
             bind<MealsByBeersRepository>() with provider { MealsByBeersRepositoryImpl(instance()) }
             bind<GetBeersUseCase>() with provider { GetBeersUseCase(instance()) }
-            bind<MainActivityViewModel>() with provider { MainActivityViewModel(instance()) }
+            bind<MealsByBeersViewModel>() with provider { MealsByBeersViewModel(instance()) }
         }
     }
 }

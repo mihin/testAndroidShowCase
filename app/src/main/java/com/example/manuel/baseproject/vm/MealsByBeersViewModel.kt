@@ -7,7 +7,7 @@ import com.example.manuel.baseproject.domain.model.BeerModel
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
 import kotlinx.coroutines.*
 
-class MainActivityViewModel(private val getMealsByBeersUseCase: GetBeersUseCase) : BaseViewModel() {
+class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase) : BaseViewModel() {
 
     private val screenStateLiveData: MutableLiveData<ResultWrapper<List<BeerModel>>> =
             MutableLiveData()

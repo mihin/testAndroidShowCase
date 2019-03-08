@@ -12,14 +12,14 @@ import com.example.manuel.baseproject.commons.utils.enums.ResultType
 import com.example.manuel.baseproject.di.KodeinContainers
 import com.example.manuel.baseproject.domain.model.BeerModel
 import com.example.manuel.baseproject.ui.adapterlist.BeersAdapter
-import com.example.manuel.baseproject.vm.MainActivityViewModel
+import com.example.manuel.baseproject.vm.MealsByBeersViewModel
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.newInstance
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MealsByBeersActivity : BaseActivity() {
 
-    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var viewModel: MealsByBeersViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class MealsByBeersActivity : BaseActivity() {
 
     private fun initViewModel() {
         viewModel = KodeinContainers.diBaseProject.newInstance {
-            MainActivityViewModel(instance())
+            MealsByBeersViewModel(instance())
         }
     }
 
