@@ -42,7 +42,7 @@ class MealsByBeersActivity : BaseActivity() {
     }
 
     private fun onResultWrapperReceived(result: ResultWrapper<List<BeerModel>>?) {
-        when (result?.resultType) { //why not create a sealed class for this
+        when (result?.resultType) {
             ResultType.LOADING -> showSpinner(true)
             ResultType.ERROR -> showError()
             ResultType.EMPTY_DATA -> showEmptyDataResult(result.data?.size)
@@ -52,6 +52,7 @@ class MealsByBeersActivity : BaseActivity() {
 
     private fun showError() {
         showSpinner(false)
+        // Show error message
     }
 
     private fun showSpinner(isViewVisible: Boolean) {
