@@ -11,31 +11,27 @@ import java.lang.Exception
 @ExperimentalCoroutinesApi
 class MealsByBeersNetworkDatasource(private val retrofitConfiguration: RetrofitConfiguration) {
 
-    fun getBeersFilteredByMeal(food: String, page: String): ResultWrapper<List<BeerResponse>>? {
+    suspend fun getBeersFilteredByMeal(food: String, page: String): ResultWrapper<List<BeerResponse>>? {
         var result: ResultWrapper<List<BeerResponse>>? = ResultWrapper.emptyData()
 
-        runBlocking {
-            launch {
-                try {
-                    val retrofitInstance = retrofitConfiguration.getRetrofitInstance()
+        try {
+            val retrofitInstance = retrofitConfiguration.getRetrofitInstance()
 
-                    val beersService = retrofitInstance.create(BeersApiService::class.java)
-                    val request = beersService.getBeersFilteredByMeal(
-                            food,
-                            page,
-                            BaseProjectConstants.MAX_RESULTS_PER_PAGE.toString()
-                    )
+            val beersService = retrofitInstance.create(BeersApiService::class.java)
+            val request = beersService.getBeersFilteredByMeal(
+                    food,
+                    page,
+                    BaseProjectConstants.MAX_RESULTS_PER_PAGE.toString()
+            )
 
-                    val response = request?.await()
+            val response = request?.await()
 
-                    request?.let {
-                        if (it.isCompleted) result = ResultWrapper.success(response)
-                        else if (it.isCancelled) result = ResultWrapper.error(BaseProjectConstants.NETWORK_DATASOURCE_ERROR_MESSAGE)
-                    }
-                } catch (ex: Exception) {
-                    result = ResultWrapper.error(BaseProjectConstants.NETWORK_DATASOURCE_ERROR_MESSAGE)
-                }
+            request?.let {
+                if (it.isCompleted) result = ResultWrapper.success(response)
+                else if (it.isCancelled) result = ResultWrapper.error(BaseProjectConstants.NETWORK_DATASOURCE_ERROR_MESSAGE)
             }
+        } catch (ex: Exception) {
+            result = ResultWrapper.error(BaseProjectConstants.NETWORK_DATASOURCE_ERROR_MESSAGE)
         }
 
         return result

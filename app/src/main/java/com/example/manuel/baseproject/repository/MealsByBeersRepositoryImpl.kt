@@ -43,7 +43,7 @@ class MealsByBeersRepositoryImpl constructor(private val mealsByBeersNetworkData
     }
 
     @ExperimentalCoroutinesApi
-    private fun getBeersFilteredByMeal(food: String): ResultWrapper<List<BeerModel>> {
+    private suspend fun getBeersFilteredByMeal(food: String): ResultWrapper<List<BeerModel>> {
         var page = -1
 
         do {
