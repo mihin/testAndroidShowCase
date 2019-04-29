@@ -1,4 +1,4 @@
-package com.example.manuel.baseproject.repository
+package com.example.manuel.baseproject.domain
 
 import com.example.manuel.baseproject.commons.utils.dto.ResultWrapper
 import com.example.manuel.baseproject.domain.model.BeerModel

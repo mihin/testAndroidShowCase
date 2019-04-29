@@ -1,7 +1,7 @@
 package com.example.manuel.baseproject.di
 
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
-import com.example.manuel.baseproject.repository.MealsByBeersRepository
+import com.example.manuel.baseproject.domain.MealsByBeersRepository
 import com.example.manuel.baseproject.repository.MealsByBeersRepositoryImpl
 import com.example.manuel.baseproject.repository.datasource.MealsByBeersNetworkDatasource
 import com.example.manuel.baseproject.repository.datasource.retrofit.RetrofitConfiguration

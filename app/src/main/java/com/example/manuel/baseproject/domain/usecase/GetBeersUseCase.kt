@@ -3,7 +3,7 @@ package com.example.manuel.baseproject.domain.usecase
 import com.example.manuel.baseproject.commons.utils.dto.ResultWrapper
 import com.example.manuel.baseproject.commons.utils.enums.ResultType
 import com.example.manuel.baseproject.domain.model.BeerModel
-import com.example.manuel.baseproject.repository.MealsByBeersRepository
+import com.example.manuel.baseproject.domain.MealsByBeersRepository
 
 class GetBeersUseCase(private val mealsByBeersRepository: MealsByBeersRepository) {
 
