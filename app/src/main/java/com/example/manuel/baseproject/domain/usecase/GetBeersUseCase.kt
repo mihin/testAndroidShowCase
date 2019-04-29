@@ -1,14 +1,15 @@
 package com.example.manuel.baseproject.domain.usecase
 
 import com.example.manuel.baseproject.commons.utils.dto.ResultWrapper
+import com.example.manuel.baseproject.commons.utils.enums.MealsType
 import com.example.manuel.baseproject.commons.utils.enums.ResultType
 import com.example.manuel.baseproject.domain.model.BeerModel
 import com.example.manuel.baseproject.domain.MealsByBeersRepository
 
 class GetBeersUseCase(private val mealsByBeersRepository: MealsByBeersRepository) {
 
-    fun execute(food: String): ResultWrapper<List<BeerModel>> {
-        val unSortedBeers: ResultWrapper<List<BeerModel>> = mealsByBeersRepository.getBeers(food)
+    suspend fun execute(mealType: MealsType): ResultWrapper<List<BeerModel>> {
+        val unSortedBeers: ResultWrapper<List<BeerModel>> = mealsByBeersRepository.getBeers(mealType)
         var sortedBeers: ResultWrapper<List<BeerModel>> = unSortedBeers
 
         val isResultSuccess = unSortedBeers.resultType == ResultType.SUCCESS

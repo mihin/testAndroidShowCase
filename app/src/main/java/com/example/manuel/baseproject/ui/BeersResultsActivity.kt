@@ -3,11 +3,11 @@ package com.example.manuel.baseproject.ui
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.View
 import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.commons.ui.BaseActivity
 import com.example.manuel.baseproject.commons.utils.dto.ResultWrapper
+import com.example.manuel.baseproject.commons.utils.enums.MealsType
 import com.example.manuel.baseproject.commons.utils.enums.ResultType
 import com.example.manuel.baseproject.di.KodeinContainers
 import com.example.manuel.baseproject.domain.model.BeerModel
@@ -15,19 +15,18 @@ import com.example.manuel.baseproject.ui.adapterlist.BeersAdapter
 import com.example.manuel.baseproject.vm.MealsByBeersViewModel
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.newInstance
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_beers_results.*
 
-class MealsByBeersActivity : BaseActivity() {
+class BeersResultsActivity : BaseActivity() {
 
     private lateinit var viewModel: MealsByBeersViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_beers_results)
 
         initViewModel()
         initObservers()
-        //initSearchButtonListener()
         onSearchButtonPress()
     }
 
@@ -78,11 +77,21 @@ class MealsByBeersActivity : BaseActivity() {
         }
     }
 
-    private fun initSearchButtonListener() {
-        main_activity_search_button.setOnClickListener { onSearchButtonPress() }
+    private fun onSearchButtonPress() {
+        val mealType = getMealTypeFromBundle()
+
+        viewModel.onSearchButtonPress(mealType)
     }
 
-    private fun onSearchButtonPress() {
-        viewModel.onSearchButtonPress("chicken")
+    private fun getMealTypeFromBundle(): MealsType {
+        var mealType: MealsType = MealsType.ALL
+
+        val hasIntentMealTypeExtra = intent.hasExtra(IntentConstants.INTENT_MEAL_TYPE)
+
+        if (hasIntentMealTypeExtra) {
+            mealType = intent.getSerializableExtra(IntentConstants.INTENT_MEAL_TYPE) as MealsType
+        }
+
+        return mealType
     }
 }

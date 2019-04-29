@@ -2,6 +2,7 @@ package com.example.manuel.baseproject.vm
 
 import android.arch.lifecycle.MutableLiveData
 import com.example.manuel.baseproject.commons.utils.dto.ResultWrapper
+import com.example.manuel.baseproject.commons.utils.enums.MealsType
 import com.example.manuel.baseproject.commons.vm.BaseViewModel
 import com.example.manuel.baseproject.domain.model.BeerModel
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
@@ -17,11 +18,11 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
         return screenStateLiveData
     }
 
-    fun onSearchButtonPress(food: String) {
+    fun onSearchButtonPress(mealType: MealsType) {
         setScreenStateLiveDataToLoadingState()
 
         job = GlobalScope.launch(Dispatchers.Default) {
-            getMealsByBeersUseCase.execute(food).let {
+            getMealsByBeersUseCase.execute(mealType).let {
                 screenStateLiveData.postValue(it)
             }
         }
