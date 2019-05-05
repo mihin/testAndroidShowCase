@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_beers_results.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
-class BeersResultsActivity : BaseActivity() {
+class BeersResultActivity : BaseActivity() {
 
     private lateinit var viewModel: MealsByBeersViewModel
 
@@ -45,7 +45,7 @@ class BeersResultsActivity : BaseActivity() {
             ResultType.LOADING -> showSpinner(true)
             ResultType.ERROR -> showError()
             ResultType.EMPTY_DATA -> showEmptyDataResult(result.data?.size)
-            ResultType.SUCCESS -> showBeers(result.data)// do nothing
+            ResultType.SUCCESS -> showBeers(result.data)
         }
     }
 
