@@ -8,11 +8,6 @@ import retrofit2.http.Query
 interface BeersApiService {
 
     @GET("beers?")
-    fun getBeersFilteredByMeal(@Query("food") food: String,
-                               @Query("page") page: String,
-                               @Query("per_page") perPage: String): Deferred<List<BeerResponse>>?
-
-    @GET("beers?")
-    fun getBeers(@Query("page") page: String,
-                 @Query("per_page") perPage: String): Deferred<List<BeerResponse>>?
+    fun getAllBeersAsync(@Query("page") page: String,
+                         @Query("per_page") perPage: String): Deferred<List<BeerResponse>>?
 }

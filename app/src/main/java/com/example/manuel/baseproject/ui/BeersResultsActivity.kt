@@ -6,8 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.commons.ui.BaseActivity
-import com.example.manuel.baseproject.commons.utils.dto.ResultWrapper
-import com.example.manuel.baseproject.commons.utils.enums.MealsType
+import com.example.manuel.baseproject.commons.utils.dto.Result
 import com.example.manuel.baseproject.commons.utils.enums.ResultType
 import com.example.manuel.baseproject.di.KodeinContainers
 import com.example.manuel.baseproject.domain.model.BeerModel
@@ -16,7 +15,9 @@ import com.example.manuel.baseproject.vm.MealsByBeersViewModel
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.newInstance
 import kotlinx.android.synthetic.main.activity_beers_results.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class BeersResultsActivity : BaseActivity() {
 
     private lateinit var viewModel: MealsByBeersViewModel
@@ -26,8 +27,7 @@ class BeersResultsActivity : BaseActivity() {
         setContentView(R.layout.activity_beers_results)
 
         initViewModel()
-        initObservers()
-        onSearchButtonPress()
+        observerScreenState()
     }
 
     private fun initViewModel() {
@@ -36,11 +36,11 @@ class BeersResultsActivity : BaseActivity() {
         }
     }
 
-    private fun initObservers() {
-        viewModel.getScreenStateLivedata().observe(this, Observer(::onResultWrapperReceived))
+    private fun observerScreenState() {
+        viewModel.getScreenStateLiveData().observe(this, Observer(::onResultWrapperReceived))
     }
 
-    private fun onResultWrapperReceived(result: ResultWrapper<List<BeerModel>>?) {
+    private fun onResultWrapperReceived(result: Result<List<BeerModel>>?) {
         when (result?.resultType) {
             ResultType.LOADING -> showSpinner(true)
             ResultType.ERROR -> showError()
@@ -54,18 +54,13 @@ class BeersResultsActivity : BaseActivity() {
         // Show error message
     }
 
-    private fun showSpinner(isViewVisible: Boolean) {
-        main_activity_spinner.apply {
-            visibility = if (isViewVisible) View.VISIBLE else View.GONE
-        }
-    }
-
     private fun showEmptyDataResult(beersSize: Int?) {
-        // Show the message
+        // Show empty data message
     }
 
     private fun showBeers(beersModel: List<BeerModel>?) {
         showSpinner(false)
+
         beersModel?.let {
             recycler_view_beers.layoutManager = LinearLayoutManager(this)
 
@@ -77,21 +72,9 @@ class BeersResultsActivity : BaseActivity() {
         }
     }
 
-    private fun onSearchButtonPress() {
-        val mealType = getMealTypeFromBundle()
-
-        viewModel.onSearchButtonPress(mealType)
-    }
-
-    private fun getMealTypeFromBundle(): MealsType {
-        var mealType: MealsType = MealsType.ALL
-
-        val hasIntentMealTypeExtra = intent.hasExtra(IntentConstants.INTENT_MEAL_TYPE)
-
-        if (hasIntentMealTypeExtra) {
-            mealType = intent.getSerializableExtra(IntentConstants.INTENT_MEAL_TYPE) as MealsType
+    private fun showSpinner(isViewVisible: Boolean) {
+        main_activity_spinner.apply {
+            visibility = if (isViewVisible) View.VISIBLE else View.GONE
         }
-
-        return mealType
     }
 }

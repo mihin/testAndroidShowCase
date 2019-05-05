@@ -1,34 +1,33 @@
 package com.example.manuel.baseproject.repository.mapper
 
-import android.util.Log
-import com.example.manuel.baseproject.commons.utils.dto.ResultWrapper
+import com.example.manuel.baseproject.commons.utils.dto.Result
 import com.example.manuel.baseproject.commons.utils.enums.ResultType
-import com.example.manuel.baseproject.commons.utils.constants.BaseProjectConstants
+import com.example.manuel.baseproject.repository.constants.Constants
 import com.example.manuel.baseproject.domain.model.BeerModel
 import com.example.manuel.baseproject.repository.datasource.model.BeerResponse
 
 class Mapper private constructor() {
 
     companion object {
-        fun map(beersResponseResultWrapper: ResultWrapper<List<BeerResponse>>?): ResultWrapper<List<BeerModel>> {
-            var beersModelResultWrapper: ResultWrapper<List<BeerModel>> = ResultWrapper.success(listOf())
+        fun map(beersResponseResult: Result<List<BeerResponse>>?): Result<List<BeerModel>> {
+            var beersModelResult: Result<List<BeerModel>> = Result.success(listOf())
 
-            beersResponseResultWrapper?.let {
-                beersModelResultWrapper =
+            beersResponseResult?.let {
+                beersModelResult =
                         if (it.resultType == ResultType.SUCCESS) mapAux(it)
-                        else ResultWrapper.error(BaseProjectConstants.NETWORK_DATASOURCE_ERROR_MESSAGE)
+                        else Result.error(Constants.NETWORK_DATASOURCE_ERROR_MESSAGE)
             }
 
-            return beersModelResultWrapper
+            return beersModelResult
         }
 
-        private fun mapAux(beersResponseResultWrapper: ResultWrapper<List<BeerResponse>>):
-                ResultWrapper<List<BeerModel>> {
+        private fun mapAux(beersResponseResult: Result<List<BeerResponse>>):
+                Result<List<BeerModel>> {
 
             val beersModel: MutableList<BeerModel> = mutableListOf()
-            val beersModelResultWrapper: ResultWrapper<List<BeerModel>> = ResultWrapper.success(beersModel)
+            val beersModelResult: Result<List<BeerModel>> = Result.success(beersModel)
 
-            beersResponseResultWrapper.data?.forEach {
+            beersResponseResult.data?.forEach {
                 beersModel.add(
                         BeerModel(
                                 id = it.id,
@@ -40,7 +39,7 @@ class Mapper private constructor() {
                 )
             }
 
-            return beersModelResultWrapper
+            return beersModelResult
         }
     }
 }

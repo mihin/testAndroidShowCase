@@ -10,10 +10,12 @@ import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.provider
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class KodeinContainers {
 
     companion object {
+        @ExperimentalCoroutinesApi
         val diBaseProject = Kodein {
             bind<RetrofitConfiguration>() with provider { RetrofitConfiguration() }
             bind<MealsByBeersNetworkDatasource>() with provider { MealsByBeersNetworkDatasource(instance()) }
