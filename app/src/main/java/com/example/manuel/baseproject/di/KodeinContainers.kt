@@ -3,8 +3,8 @@ package com.example.manuel.baseproject.di
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
 import com.example.manuel.baseproject.domain.MealsByBeersRepository
 import com.example.manuel.baseproject.repository.MealsByBeersRepositoryImpl
-import com.example.manuel.baseproject.repository.datasource.MealsByBeersNetworkDatasource
-import com.example.manuel.baseproject.repository.datasource.retrofit.RetrofitConfiguration
+import com.example.manuel.baseproject.datasource.MealsByBeersNetworkDatasource
+import com.example.manuel.baseproject.datasource.retrofit.RetrofitConfiguration
 import com.example.manuel.baseproject.vm.MealsByBeersViewModel
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind

@@ -4,7 +4,7 @@ import com.example.manuel.baseproject.commons.utils.dto.Result
 import com.example.manuel.baseproject.commons.utils.enums.ResultType
 import com.example.manuel.baseproject.repository.constants.Constants
 import com.example.manuel.baseproject.domain.model.BeerModel
-import com.example.manuel.baseproject.repository.datasource.model.BeerResponse
+import com.example.manuel.baseproject.datasource.model.BeerResponse
 
 class Mapper private constructor() {
 

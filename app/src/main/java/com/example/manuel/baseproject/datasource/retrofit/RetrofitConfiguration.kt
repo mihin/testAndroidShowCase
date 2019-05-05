@@ -1,4 +1,4 @@
-package com.example.manuel.baseproject.repository.datasource.retrofit
+package com.example.manuel.baseproject.datasource.retrofit
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit

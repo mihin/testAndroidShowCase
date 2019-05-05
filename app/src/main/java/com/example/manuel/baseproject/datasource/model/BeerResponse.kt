@@ -1,4 +1,4 @@
-package com.example.manuel.baseproject.repository.datasource.model
+package com.example.manuel.baseproject.datasource.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -5,7 +5,7 @@ import com.example.manuel.baseproject.commons.utils.dto.Result
 import com.example.manuel.baseproject.domain.MealsByBeersRepository
 import com.example.manuel.baseproject.domain.model.BeerModel
 import com.example.manuel.baseproject.repository.mapper.Mapper
-import com.example.manuel.baseproject.repository.datasource.MealsByBeersNetworkDatasource
+import com.example.manuel.baseproject.datasource.MealsByBeersNetworkDatasource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
