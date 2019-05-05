@@ -3,6 +3,8 @@ package com.example.manuel.baseproject.domain
 import com.example.manuel.baseproject.commons.utils.dto.Result
 import com.example.manuel.baseproject.domain.model.BeerModel
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
+import com.example.manuel.baseproject.domain.utils.BeersGenerator
+import com.example.manuel.baseproject.domain.utils.MessagesGenerator
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times

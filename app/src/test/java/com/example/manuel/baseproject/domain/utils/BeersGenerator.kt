@@ -1,4 +1,4 @@
-package com.example.manuel.baseproject.domain
+package com.example.manuel.baseproject.domain.utils
 
 import com.example.manuel.baseproject.domain.model.BeerModel
 
