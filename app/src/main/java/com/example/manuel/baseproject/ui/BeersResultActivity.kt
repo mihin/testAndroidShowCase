@@ -37,10 +37,10 @@ class BeersResultActivity : BaseActivity() {
     }
 
     private fun observerScreenState() {
-        viewModel.getScreenStateLiveData().observe(this, Observer(::onResultWrapperReceived))
+        viewModel.getScreenStateLiveData().observe(this, Observer(::onResultReceived))
     }
 
-    private fun onResultWrapperReceived(result: Result<List<BeerModel>>?) {
+    private fun onResultReceived(result: Result<List<BeerModel>>?) {
         when (result?.resultType) {
             ResultType.LOADING -> showSpinner(true)
             ResultType.ERROR -> showError()

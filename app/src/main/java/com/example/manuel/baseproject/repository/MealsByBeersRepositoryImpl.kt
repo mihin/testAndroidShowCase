@@ -23,8 +23,8 @@ class MealsByBeersRepositoryImpl constructor(private val mealsByBeersNetworkData
 
             mealsByBeersNetworkDatasource.getAllBeers(page.toString())
                     .let {
-                        Mapper.map(it).let { wrapperListBeerModel ->
-                            wrapperListBeerModel.data?.forEach { beerModel ->
+                        Mapper.map(it).let { beerModelList ->
+                            beerModelList.data?.forEach { beerModel ->
                                 beers.add(beerModel)
                             }
                         }

@@ -74,7 +74,8 @@ class GetBeersUseCaseTest {
             val result = Result.success(BeersGenerator.getUnsortedBeers())
             given(mockMealsByBeersRepository.getAllBeers()).willReturn(result)
 
-            val expectedResultBeers = Result.success(BeersGenerator.getSortedBeers()).data
+            val expectedResultBeers =
+                    Result.success(BeersGenerator.getSortedBeers()).data
             val realResultBeers = getBeersUseCase.execute().data
 
             realResultBeers?.forEachIndexed { index, currentRealResult ->
