@@ -9,9 +9,9 @@ import com.example.manuel.baseproject.commons.ui.BaseActivity
 import com.example.manuel.baseproject.commons.utils.dto.Result
 import com.example.manuel.baseproject.commons.utils.enums.ResultType
 import com.example.manuel.baseproject.di.KodeinContainers
-import com.example.manuel.baseproject.domain.model.BeerModel
 import com.example.manuel.baseproject.ui.adapterlist.BeersAdapter
 import com.example.manuel.baseproject.vm.MealsByBeersViewModel
+import com.example.manuel.baseproject.vm.model.BeerUI
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.newInstance
 import kotlinx.android.synthetic.main.activity_beers_results.*
@@ -40,7 +40,7 @@ class BeersResultActivity : BaseActivity() {
         viewModel.getScreenStateLiveData().observe(this, Observer(::onResultReceived))
     }
 
-    private fun onResultReceived(result: Result<List<BeerModel>>?) {
+    private fun onResultReceived(result: Result<List<BeerUI>>?) {
         when (result?.resultType) {
             ResultType.LOADING -> showSpinner(true)
             ResultType.ERROR -> showError()
@@ -58,7 +58,7 @@ class BeersResultActivity : BaseActivity() {
         // Show empty data message
     }
 
-    private fun showBeers(beersModel: List<BeerModel>?) {
+    private fun showBeers(beersModel: List<BeerUI>?) {
         showSpinner(false)
 
         beersModel?.let {

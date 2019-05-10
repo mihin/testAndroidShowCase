@@ -1,10 +1,10 @@
 package com.example.manuel.baseproject.ui.adapterlist
 
 import android.support.v7.util.DiffUtil
-import com.example.manuel.baseproject.domain.model.BeerModel
+import com.example.manuel.baseproject.vm.model.BeerUI
 
-class BeersDiffCallback(private val oldBeers: List<BeerModel>,
-                        private val newBeers: List<BeerModel>) : DiffUtil.Callback() {
+class BeersDiffCallback(private val oldBeers: List<BeerUI>,
+                        private val newBeers: List<BeerUI>) : DiffUtil.Callback() {
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
             oldBeers[oldItemPosition].id == newBeers[newItemPosition].id

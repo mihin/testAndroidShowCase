@@ -12,9 +12,10 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.domain.model.BeerModel
+import com.example.manuel.baseproject.vm.model.BeerUI
 import kotlinx.android.synthetic.main.item_list_beer.view.*
 
-class BeersAdapter(private var beers: MutableList<BeerModel>, private val context: Context) :
+class BeersAdapter(private var beers: MutableList<BeerUI>, private val context: Context) :
         RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -58,7 +59,7 @@ class BeersAdapter(private var beers: MutableList<BeerModel>, private val contex
         }
     }
 
-    fun updateAdapter(updatedList: List<BeerModel>) {
+    fun updateAdapter(updatedList: List<BeerUI>) {
         val result = DiffUtil.calculateDiff(BeersDiffCallback(this.beers, updatedList))
 
         this.beers = updatedList.toMutableList()
