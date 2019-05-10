@@ -26,7 +26,7 @@ object Mapper: BaseMapper<Result<List<BeerModel>>, Result<List<BeerUI>>> {
                 }
                 result = Result.success(beersUi)
             } else {
-                result = Result<List<BeerUI>>(type.resultType)
+                result = Result(type.resultType)
             }
         }
 
