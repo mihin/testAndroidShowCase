@@ -1,11 +1,11 @@
 package com.example.manuel.baseproject.ui
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.manuel.baseproject.R
-import com.example.manuel.baseproject.commons.ui.BaseActivity
 import com.example.manuel.baseproject.commons.utils.dto.Result
 import com.example.manuel.baseproject.commons.utils.enums.ResultType
 import com.example.manuel.baseproject.di.KodeinContainers
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_beers_results.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
-class BeersResultActivity : BaseActivity() {
+class BeersResultActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MealsByBeersViewModel
 
@@ -37,7 +37,7 @@ class BeersResultActivity : BaseActivity() {
     }
 
     private fun observerScreenState() {
-        viewModel.getScreenStateLiveData().observe(this, Observer(::onResultReceived))
+        viewModel.getScreenStateLiveData.observe(this, Observer(::onResultReceived))
     }
 
     private fun onResultReceived(result: Result<List<BeerUI>>?) {

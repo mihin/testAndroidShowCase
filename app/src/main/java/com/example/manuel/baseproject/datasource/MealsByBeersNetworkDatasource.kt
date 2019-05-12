@@ -14,24 +14,26 @@ class MealsByBeersNetworkDatasource(private val retrofitConfiguration: RetrofitC
     suspend fun getAllBeers(page: String): Result<List<BeerResponse>>? {
         var result: Result<List<BeerResponse>>? = Result.emptyData()
 
-        try {
-            val retrofitInstance = retrofitConfiguration.getRetrofitInstance()
+        withContext(Dispatchers.IO) {
+            try {
+                val retrofitInstance = retrofitConfiguration.getRetrofitInstance()
 
-            val beersService = retrofitInstance.create(BeersApiService::class.java)
-            val request = beersService.getAllBeersAsync(
-                    page,
-                    Constants.MAX_RESULTS_PER_PAGE.toString()
-            )
+                val beersService = retrofitInstance.create(BeersApiService::class.java)
+                val request = beersService.getAllBeersAsync(
+                        page,
+                        Constants.MAX_RESULTS_PER_PAGE.toString()
+                )
 
-            val response = request?.await()
+                val response = request?.await()
 
-            request?.let {
-                if (it.isCompleted) result = Result.success(response)
-                else if (it.isCancelled) result =
-                        Result.error(Constants.NETWORK_DATASOURCE_ERROR_MESSAGE)
+                request?.let {
+                    if (it.isCompleted) result = Result.success(response)
+                    else if (it.isCancelled) result =
+                            Result.error(Constants.NETWORK_DATASOURCE_ERROR_MESSAGE)
+                }
+            } catch (ex: Exception) {
+                result = Result.error(Constants.NETWORK_DATASOURCE_ERROR_MESSAGE)
             }
-        } catch (ex: Exception) {
-            result = Result.error(Constants.NETWORK_DATASOURCE_ERROR_MESSAGE)
         }
 
         return result
