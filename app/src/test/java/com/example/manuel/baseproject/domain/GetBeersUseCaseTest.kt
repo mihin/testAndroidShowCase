@@ -19,11 +19,11 @@ class GetBeersUseCaseTest {
     private val getBeersUseCase = GetBeersUseCase(mockMealsByBeersRepository)
 
     @Test
-    fun <T>verifyResultWhenRepoMockReturnErrorState() {
+    fun <T> verifyResultWhenRepoMockReturnErrorState() {
         runBlocking {
-            given(mockMealsByBeersRepository.getAllBeers()).willReturn(Result.error(""))
+            given(mockMealsByBeersRepository.getAllBeers()).willReturn(Result.error(MessagesGenerator.NETWORK_DATASOURCE_ERROR_MESSAGE))
 
-            val expectedResult = Result.error<T>("")
+            val expectedResult = Result.error<T>(MessagesGenerator.NETWORK_DATASOURCE_ERROR_MESSAGE)
             val realResult = getBeersUseCase.execute()
 
             Assert.assertEquals(expectedResult, realResult)
@@ -31,7 +31,7 @@ class GetBeersUseCaseTest {
     }
 
     @Test
-    fun <T>verifyMessageResultWhenRepoMockReturnErrorState() {
+    fun <T> verifyMessageResultWhenRepoMockReturnErrorState() {
         runBlocking {
             given(mockMealsByBeersRepository.getAllBeers())
                     .willReturn(Result.error(MessagesGenerator.NETWORK_DATASOURCE_ERROR_MESSAGE))
@@ -44,7 +44,7 @@ class GetBeersUseCaseTest {
     }
 
     @Test
-    fun <T>verifyResultWhenRepoMockReturnIsEmptyState() {
+    fun <T> verifyResultWhenRepoMockReturnIsEmptyState() {
         runBlocking {
             given(mockMealsByBeersRepository.getAllBeers()).willReturn(Result.emptyData())
 
@@ -84,6 +84,18 @@ class GetBeersUseCaseTest {
 
                 Assert.assertEquals(realResult, currentExpectedResult)
             }
+        }
+    }
+
+    @Test
+    fun verifyResultWhenRepoMockReturnEmptyState() {
+        runBlocking {
+            given(mockMealsByBeersRepository.getAllBeers()).willReturn(Result.emptyData())
+
+            val expectedResult = Result.emptyData<List<BeerModel>>()
+            val realResult = getBeersUseCase.execute()
+
+            Assert.assertEquals(expectedResult, realResult)
         }
     }
 

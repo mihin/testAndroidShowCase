@@ -58,10 +58,10 @@ class BeersResultActivity : AppCompatActivity() {
         // Show empty data message
     }
 
-    private fun showBeers(beersModel: List<BeerUI>?) {
+    private fun showBeers(beersUI: List<BeerUI>?) {
         showSpinner(false)
 
-        beersModel?.let {
+        beersUI?.let {
             recycler_view_beers.layoutManager = LinearLayoutManager(this)
 
             val beersAdapter = BeersAdapter(it.toMutableList(), this)
