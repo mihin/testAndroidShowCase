@@ -4,6 +4,7 @@ import com.example.manuel.baseproject.commons.BaseMapper
 import com.example.manuel.baseproject.commons.utils.dto.Result
 import com.example.manuel.baseproject.commons.utils.enums.ResultType
 import com.example.manuel.baseproject.domain.model.BeerModel
+import com.example.manuel.baseproject.vm.model.AbvType
 import com.example.manuel.baseproject.vm.model.BeerUI
 
 object Mapper: BaseMapper<Result<List<BeerModel>>, Result<List<BeerUI>>> {
@@ -20,7 +21,8 @@ object Mapper: BaseMapper<Result<List<BeerModel>>, Result<List<BeerUI>>> {
                                     name = beerModel.name,
                                     tagline = beerModel.tagline,
                                     image = beerModel.image,
-                                    abv = beerModel.abv
+                                    abv = beerModel.abv,
+                                    abvType = getAbvType(beerModel.abv!!)
                             )
                     )
                 }
@@ -32,4 +34,11 @@ object Mapper: BaseMapper<Result<List<BeerModel>>, Result<List<BeerUI>>> {
 
         return result
     }
+
+    private fun getAbvType(abv: Double) =
+            when {
+                abv < 5 -> AbvType.GREEN
+                abv >= 5 && abv < 8 -> AbvType.ORANGE
+                else -> AbvType.RED
+            }
 }
