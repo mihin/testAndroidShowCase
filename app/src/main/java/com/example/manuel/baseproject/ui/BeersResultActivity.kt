@@ -20,8 +20,6 @@ class BeersResultActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MealsByBeersViewModel
 
-    private lateinit var beers: ArrayList<BeerUI>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_beers_results)
@@ -50,8 +48,6 @@ class BeersResultActivity : AppCompatActivity() {
 
     private fun showBeers(beersUI: List<BeerUI>?) {
         beersUI?.let {
-            this.beers = ArrayList(beersUI)
-
             recycler_view_beers.layoutManager = LinearLayoutManager(this)
 
             val beersAdapter = BeersAdapter(it.toMutableList(), this)
