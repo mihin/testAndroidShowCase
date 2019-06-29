@@ -1,37 +1,74 @@
 package com.example.manuel.baseproject.vm
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.manuel.baseproject.commons.utils.dto.Result
+import com.example.manuel.baseproject.commons.utils.enums.ResultType
+import com.example.manuel.baseproject.domain.model.BeerModel
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
-import com.example.manuel.baseproject.vm.mapper.Mapper
+import com.example.manuel.baseproject.vm.mapper.MapperTestTest
 import com.example.manuel.baseproject.vm.model.BeerUI
 import kotlinx.coroutines.*
 
 class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase) : ViewModel() {
 
-    private val screenStateLiveData: MutableLiveData<Result<List<BeerUI>>> =
-            MutableLiveData()
+    private val beersLiveData: MutableLiveData<List<BeerUI>> = MutableLiveData()
+    private val isEmptyBeersLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    private val isErrorLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    private val isLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
-    val getScreenStateLiveData: LiveData<Result<List<BeerUI>>>
-        get() = screenStateLiveData
+    val beers: MutableLiveData<List<BeerUI>>
+        get() = beersLiveData
+
+    val areEmptyBeers: MutableLiveData<Boolean>
+        get() = isEmptyBeersLiveData
+
+    val isError: MutableLiveData<Boolean>
+        get() = isErrorLiveData
+
+    val isLoading: MutableLiveData<Boolean>
+        get() = isLoadingLiveData
 
     init {
-        handleBeersResultLoad()
+        handleBeersLoad()
     }
 
-    private fun handleBeersResultLoad() {
+    private fun handleBeersLoad() {
         viewModelScope.launch {
             setScreenStateLiveDataToLoadingState()
-            getMealsByBeersUseCase.execute().let {
-                screenStateLiveData.postValue(Mapper.mapFrom(it))
-            }
+            updateAppropriateLiveData(
+                    getMealsByBeersUseCase.execute()
+            )
         }
     }
 
     private fun setScreenStateLiveDataToLoadingState() {
-        screenStateLiveData.value = Result.loading()
+        isLoading.value = true
+    }
+
+    private fun updateAppropriateLiveData(result: Result<List<BeerModel>>) {
+        if (isResultSuccess(result)) {
+            onResultSuccess(result.data)
+        } else {
+            onResultError()
+        }
+    }
+
+    private fun isResultSuccess(result: Result<List<BeerModel>>) =
+            result.resultType == ResultType.SUCCESS
+
+    private fun onResultSuccess(beersModel: List<BeerModel>?) {
+        val beers = MapperTestTest.mapFrom(beersModel)
+
+        if (beers.isEmpty()) {
+            areEmptyBeers.postValue(true)
+        } else {
+            beersLiveData.postValue(beers)
+        }
+    }
+
+    private fun onResultError() {
+        isErrorLiveData.postValue(true)
     }
 }

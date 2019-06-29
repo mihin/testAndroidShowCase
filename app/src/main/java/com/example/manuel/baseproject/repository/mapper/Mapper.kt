@@ -31,10 +31,7 @@ object Mapper : BaseMapper<Result<List<BeerResponse>>?, Result<List<BeerModel>>>
             )
         }
 
-        return when {
-            beersModel.isEmpty() -> Result.emptyData()
-            else -> Result.success(beersModel)
-        }
+        return Result.success(beersModel)
     }
 }
 

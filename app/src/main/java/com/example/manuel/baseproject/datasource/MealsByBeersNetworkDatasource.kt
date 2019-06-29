@@ -12,7 +12,7 @@ import java.lang.Exception
 class MealsByBeersNetworkDatasource(private val retrofitConfiguration: RetrofitConfiguration) {
 
     suspend fun getAllBeers(page: String): Result<List<BeerResponse>>? {
-        var result: Result<List<BeerResponse>>? = Result.emptyData()
+        var result: Result<List<BeerResponse>>? = Result.success(listOf())
 
         withContext(Dispatchers.IO) {
             try {

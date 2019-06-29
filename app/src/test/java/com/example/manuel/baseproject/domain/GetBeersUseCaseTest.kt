@@ -44,18 +44,6 @@ class GetBeersUseCaseTest {
     }
 
     @Test
-    fun <T> verifyResultWhenRepoMockReturnIsEmptyState() {
-        runBlocking {
-            given(mockMealsByBeersRepository.getAllBeers()).willReturn(Result.emptyData())
-
-            val expectedResult = Result.emptyData<T>()
-            val realResult = getBeersUseCase.execute()
-
-            Assert.assertEquals(expectedResult, realResult)
-        }
-    }
-
-    @Test
     fun verifyResultWhenRepoMockReturnSuccessState() {
         runBlocking {
             val result = Result.success(listOf<BeerModel>())
@@ -88,21 +76,9 @@ class GetBeersUseCaseTest {
     }
 
     @Test
-    fun verifyResultWhenRepoMockReturnEmptyState() {
-        runBlocking {
-            given(mockMealsByBeersRepository.getAllBeers()).willReturn(Result.emptyData())
-
-            val expectedResult = Result.emptyData<List<BeerModel>>()
-            val realResult = getBeersUseCase.execute()
-
-            Assert.assertEquals(expectedResult, realResult)
-        }
-    }
-
-    @Test
     fun verifyUseCaseCallRepository() {
         runBlocking {
-            given(mockMealsByBeersRepository.getAllBeers()).willReturn(Result.emptyData())
+            given(mockMealsByBeersRepository.getAllBeers()).willReturn(Result.success(listOf()))
 
             getBeersUseCase.execute()
 

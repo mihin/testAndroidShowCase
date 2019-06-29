@@ -16,13 +16,5 @@ data class Result<out T>(
         fun <T> error(message: String): Result<T> {
             return Result(ResultType.ERROR,  message = message)
         }
-
-        fun <T> loading(): Result<T> {
-            return Result(ResultType.LOADING)
-        }
-
-        fun <T> emptyData(): Result<T> {
-            return Result(ResultType.EMPTY_DATA)
-        }
     }
 }

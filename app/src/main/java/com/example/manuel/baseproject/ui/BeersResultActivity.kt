@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.manuel.baseproject.R
-import com.example.manuel.baseproject.commons.utils.dto.Result
-import com.example.manuel.baseproject.commons.utils.enums.ResultType
 import com.example.manuel.baseproject.di.KodeinContainers
 import com.example.manuel.baseproject.ui.adapterlist.BeersAdapter
 import com.example.manuel.baseproject.vm.MealsByBeersViewModel
@@ -21,6 +19,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class BeersResultActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MealsByBeersViewModel
+
+    private lateinit var beers: ArrayList<BeerUI>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,31 +37,21 @@ class BeersResultActivity : AppCompatActivity() {
     }
 
     private fun observerScreenState() {
-        viewModel.getScreenStateLiveData.observe(this, Observer(::onResultReceived))
+        viewModel.beers.observe(this, Observer(::onBeersReceived))
+        viewModel.isError.observe(this, Observer { onErrorReceived() })
+        viewModel.areEmptyBeers.observe(this, Observer { onEmptyBeersReceived() })
+        viewModel.isLoading.observe(this, Observer { onLoadingStateReceived() })
     }
 
-    private fun onResultReceived(result: Result<List<BeerUI>>?) {
-        when (result?.resultType) {
-            ResultType.LOADING -> showSpinner(true)
-            ResultType.ERROR -> showError()
-            ResultType.EMPTY_DATA -> showEmptyDataResult(result.data?.size)
-            ResultType.SUCCESS -> showBeers(result.data)
-        }
-    }
-
-    private fun showError() {
+    private fun onBeersReceived(beers: List<BeerUI>) {
         showSpinner(false)
-        // Show error message
-    }
-
-    private fun showEmptyDataResult(beersSize: Int?) {
-        // Show empty data message
+        showBeers(beers)
     }
 
     private fun showBeers(beersUI: List<BeerUI>?) {
-        showSpinner(false)
-
         beersUI?.let {
+            this.beers = ArrayList(beersUI)
+
             recycler_view_beers.layoutManager = LinearLayoutManager(this)
 
             val beersAdapter = BeersAdapter(it.toMutableList(), this)
@@ -70,6 +60,20 @@ class BeersResultActivity : AppCompatActivity() {
 
             recycler_view_beers.setHasFixedSize(true)
         }
+    }
+
+    private fun onErrorReceived() {
+        showSpinner(false)
+        // do something
+    }
+
+    private fun onEmptyBeersReceived() {
+        showSpinner(false)
+        // do something
+    }
+
+    private fun onLoadingStateReceived() {
+        showSpinner(true)
     }
 
     private fun showSpinner(isViewVisible: Boolean) {
