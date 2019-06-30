@@ -25,7 +25,7 @@ class BeersResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_beers_results)
 
         initViewModel()
-        observerScreenState()
+        observerLiveDatas()
     }
 
     private fun initViewModel() {
@@ -34,7 +34,7 @@ class BeersResultActivity : AppCompatActivity() {
         }
     }
 
-    private fun observerScreenState() {
+    private fun observerLiveDatas() {
         viewModel.beers.observe(this, Observer(::onBeersReceived))
         viewModel.isError.observe(this, Observer { onErrorReceived() })
         viewModel.areEmptyBeers.observe(this, Observer { onEmptyBeersReceived() })
@@ -66,12 +66,12 @@ class BeersResultActivity : AppCompatActivity() {
     }
 
     private fun onLoadingStateReceived(isLoading: Boolean) {
-        if (isLoading) showSpinner(true) else showSpinner(false)
+        showSpinner(isLoading)
     }
 
-    private fun showSpinner(isViewVisible: Boolean) {
+    private fun showSpinner(isLoading: Boolean) {
         main_activity_spinner.apply {
-            visibility = if (isViewVisible) View.VISIBLE else View.GONE
+            visibility = if (isLoading) View.VISIBLE else View.GONE
         }
     }
 }
