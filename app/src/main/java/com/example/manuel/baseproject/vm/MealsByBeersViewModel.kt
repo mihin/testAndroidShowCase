@@ -7,7 +7,7 @@ import com.example.manuel.baseproject.commons.utils.dto.Result
 import com.example.manuel.baseproject.commons.utils.enums.ResultType
 import com.example.manuel.baseproject.domain.model.BeerModel
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
-import com.example.manuel.baseproject.vm.mapper.MapperTestTest
+import com.example.manuel.baseproject.vm.mapper.Mapper
 import com.example.manuel.baseproject.vm.model.BeerUI
 import kotlinx.coroutines.*
 
@@ -57,7 +57,7 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
             result.resultType == ResultType.SUCCESS
 
     private fun onResultSuccess(beersModel: List<BeerModel>?) {
-        val beers = MapperTestTest.mapFrom(beersModel)
+        val beers = Mapper.mapFrom(beersModel)
 
         if (beers.isEmpty()) {
             areEmptyBeers.postValue(true)
