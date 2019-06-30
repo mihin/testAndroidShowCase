@@ -52,7 +52,7 @@ dependencies {
     androidTestImplementation Libs.Testing.RUNNER
     androidTestImplementation Libs.Testing.ESPRESSO
 
-    testImplementation Libs.Testing.CORE_TESTING
+    testImplementation Libs.Testing.CORE
     testImplementation Libs.Testing.TRUTH
 
     testImplementation Libs.Testing.MOCKITO

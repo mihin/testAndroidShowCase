@@ -28,7 +28,7 @@ object Libs {
     }
 
     object Testing {
-        const val CORE_TESTING = "androidx.arch.core:core-testing:${Versions.Testing.CORE_TESTING}"
+        const val CORE = "androidx.arch.core:core-testing:${Versions.Testing.CORE_TESTING}"
         const val ESPRESSO = "androidx.test.espresso:espresso-core:${Versions.Testing.ESPRESSO}"
         const val JUNIT = "junit:junit:${Versions.Testing.JUNIT}"
         const val MOCKITO = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.Testing.MOCKITO}"
