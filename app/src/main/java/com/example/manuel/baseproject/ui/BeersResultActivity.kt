@@ -38,11 +38,10 @@ class BeersResultActivity : AppCompatActivity() {
         viewModel.beers.observe(this, Observer(::onBeersReceived))
         viewModel.isError.observe(this, Observer { onErrorReceived() })
         viewModel.areEmptyBeers.observe(this, Observer { onEmptyBeersReceived() })
-        viewModel.isLoading.observe(this, Observer { onLoadingStateReceived() })
+        viewModel.isLoading.observe(this, Observer(::onLoadingStateReceived))
     }
 
     private fun onBeersReceived(beers: List<BeerUI>) {
-        showSpinner(false)
         showBeers(beers)
     }
 
@@ -59,17 +58,15 @@ class BeersResultActivity : AppCompatActivity() {
     }
 
     private fun onErrorReceived() {
-        showSpinner(false)
         // do something
     }
 
     private fun onEmptyBeersReceived() {
-        showSpinner(false)
         // do something
     }
 
-    private fun onLoadingStateReceived() {
-        showSpinner(true)
+    private fun onLoadingStateReceived(isLoading: Boolean) {
+        if (isLoading) showSpinner(true) else showSpinner(false)
     }
 
     private fun showSpinner(isViewVisible: Boolean) {

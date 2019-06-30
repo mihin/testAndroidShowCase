@@ -36,15 +36,11 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
 
     private fun handleBeersLoad() {
         viewModelScope.launch {
-            setScreenStateLiveDataToLoadingState()
+            isLoadingLiveData(true)
             updateAppropriateLiveData(
                     getMealsByBeersUseCase.execute()
             )
         }
-    }
-
-    private fun setScreenStateLiveDataToLoadingState() {
-        isLoading.value = true
     }
 
     private fun updateAppropriateLiveData(result: Result<List<BeerModel>>) {
@@ -53,6 +49,8 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
         } else {
             onResultError()
         }
+
+        isLoadingLiveData(false)
     }
 
     private fun isResultSuccess(result: Result<List<BeerModel>>) =
@@ -70,5 +68,9 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
 
     private fun onResultError() {
         isErrorLiveData.postValue(true)
+    }
+
+    private fun isLoadingLiveData(isLoading: Boolean) {
+        this.isLoading.postValue(isLoading)
     }
 }
