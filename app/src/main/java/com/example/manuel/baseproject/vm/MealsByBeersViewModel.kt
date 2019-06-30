@@ -14,7 +14,7 @@ import kotlinx.coroutines.*
 class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase) : ViewModel() {
 
     private val beersLiveData: MutableLiveData<List<BeerUI>> = MutableLiveData()
-    private val isEmptyBeersLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    private val areEmptyBeersLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val isErrorLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val isLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -22,7 +22,7 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
         get() = beersLiveData
 
     val areEmptyBeers: MutableLiveData<Boolean>
-        get() = isEmptyBeersLiveData
+        get() = areEmptyBeersLiveData
 
     val isError: MutableLiveData<Boolean>
         get() = isErrorLiveData
@@ -60,7 +60,7 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
         val beers = Mapper.mapFrom(beersModel)
 
         if (beers.isEmpty()) {
-            areEmptyBeers.postValue(true)
+            areEmptyBeersLiveData.postValue(true)
         } else {
             beersLiveData.postValue(beers)
         }
@@ -71,6 +71,6 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
     }
 
     private fun isLoadingLiveData(isLoading: Boolean) {
-        this.isLoading.postValue(isLoading)
+        this.isLoadingLiveData.postValue(isLoading)
     }
 }
