@@ -7,24 +7,16 @@ import com.example.manuel.baseproject.vm.model.BeerUI
 
 object Mapper : BaseMapper<List<BeerModel>, List<BeerUI>> {
     override fun mapFrom(type: List<BeerModel>?): List<BeerUI> {
-        val result: MutableList<BeerUI> = mutableListOf()
-
-        type?.let { beers ->
-            beers.forEach {
-                result.add(
-                        BeerUI(
-                                id = it.id,
-                                name = it.name,
-                                tagline = it.tagline,
-                                image = it.image,
-                                abv = it.abv,
-                                abvType = Mapper.getAbvType(it.abv!!)
-                        )
-                )
-            }
-        }
-
-        return result
+        return type?.map {
+            BeerUI(
+                    id = it.id,
+                    name = it.name,
+                    tagline = it.tagline,
+                    image = it.image,
+                    abv = it.abv,
+                    abvType = Mapper.getAbvType(it.abv)
+            )
+        } ?: listOf()
     }
 
     private fun getAbvType(abv: Double) =

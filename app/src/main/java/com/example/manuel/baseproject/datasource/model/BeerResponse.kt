@@ -3,9 +3,9 @@ package com.example.manuel.baseproject.datasource.model
 import com.google.gson.annotations.SerializedName
 
 data class BeerResponse(
-        @SerializedName("id") val id: Int,
-        @SerializedName("name") val name: String,
-        @SerializedName("tagline") val tagline: String,
-        @SerializedName("image_url") val image: String,
-        @SerializedName("abv") val abv: Double
+        @SerializedName("id") val id: Int? = null,
+        @SerializedName("name") val name: String? = null,
+        @SerializedName("tagline") val tagline: String? = null,
+        @SerializedName("image_url") val image: String? = null,
+        @SerializedName("abv") val abv: Double? = null
 )

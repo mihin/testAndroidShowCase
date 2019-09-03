@@ -1,12 +1,13 @@
 package com.example.manuel.baseproject.datasource
 
-import com.example.manuel.baseproject.commons.utils.dto.Result
 import com.example.manuel.baseproject.repository.constants.Constants
 import com.example.manuel.baseproject.datasource.model.BeerResponse
 import com.example.manuel.baseproject.datasource.retrofit.BeersApiService
 import com.example.manuel.baseproject.datasource.retrofit.RetrofitConfiguration
 import kotlinx.coroutines.*
 import java.lang.Exception
+
+import com.example.manuel.baseproject.commons.utils.dto.Result
 
 @ExperimentalCoroutinesApi
 class MealsByBeersNetworkDatasource(private val retrofitConfiguration: RetrofitConfiguration) {

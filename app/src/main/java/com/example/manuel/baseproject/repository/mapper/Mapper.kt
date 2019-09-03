@@ -17,21 +17,15 @@ object Mapper : BaseMapper<Result<List<BeerResponse>>?, Result<List<BeerModel>>>
     private fun mapAux(beersResponseResult: Result<List<BeerResponse>>):
             Result<List<BeerModel>> {
 
-        val beersModel: MutableList<BeerModel> = mutableListOf()
-
-        beersResponseResult.data?.forEach {
-            beersModel.add(
-                    BeerModel(
-                            id = it.id,
-                            name = it.name,
-                            tagline = it.tagline,
-                            image = it.image,
-                            abv = it.abv
-                    )
+        return Result.success(beersResponseResult.data?.map {
+            BeerModel(
+                    id = it.id ?: -1,
+                    name = it.name ?: "",
+                    tagline = it.tagline ?: "",
+                    image = it.image ?: "",
+                    abv = it.abv ?: -1.0
             )
-        }
-
-        return Result.success(beersModel)
+        } ?: listOf())
     }
 }
 
