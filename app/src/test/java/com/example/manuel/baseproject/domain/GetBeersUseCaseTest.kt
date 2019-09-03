@@ -1,7 +1,7 @@
 package com.example.manuel.baseproject.domain
 
 import com.example.manuel.baseproject.commons.utils.dto.Result
-import com.example.manuel.baseproject.domain.model.BeerModel
+import com.example.manuel.baseproject.domain.model.BeerEntity
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
 import com.example.manuel.baseproject.domain.utils.BeersGenerator
 import com.example.manuel.baseproject.domain.utils.MessagesGenerator
@@ -46,10 +46,10 @@ class GetBeersUseCaseTest {
     @Test
     fun verifyResultWhenRepoMockReturnSuccessState() {
         runBlocking {
-            val result = Result.success(listOf<BeerModel>())
+            val result = Result.success(listOf<BeerEntity>())
             given(mockMealsByBeersRepository.getAllBeers()).willReturn(result)
 
-            val expectedResult = Result.success(listOf<BeerModel>())
+            val expectedResult = Result.success(listOf<BeerEntity>())
             val realResult = getBeersUseCase.execute()
 
             Assert.assertEquals(expectedResult, realResult)

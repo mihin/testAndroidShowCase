@@ -3,19 +3,20 @@ package com.example.manuel.baseproject.repository
 import com.example.manuel.baseproject.repository.constants.Constants
 import com.example.manuel.baseproject.commons.utils.dto.Result
 import com.example.manuel.baseproject.domain.MealsByBeersRepository
-import com.example.manuel.baseproject.domain.model.BeerModel
+import com.example.manuel.baseproject.domain.model.BeerEntity
 import com.example.manuel.baseproject.datasource.MealsByBeersNetworkDataSource
 import com.example.manuel.baseproject.repository.mapper.Mapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
-class MealsByBeersRepositoryImpl constructor(private val mealsByBeersNetworkDataSource: MealsByBeersNetworkDataSource) :
-        MealsByBeersRepository {
+class MealsByBeersRepositoryImpl constructor(
+        private val mealsByBeersNetworkDataSource: MealsByBeersNetworkDataSource
+) : MealsByBeersRepository {
 
-    private val beers = mutableListOf<BeerModel>()
+    private val beers = mutableListOf<BeerEntity>()
 
     @ExperimentalCoroutinesApi
-    override suspend fun getAllBeers(): Result<List<BeerModel>> {
+    override suspend fun getAllBeers(): Result<List<BeerEntity>> {
         var page = -1
 
         do {
@@ -50,6 +51,7 @@ class MealsByBeersRepositoryImpl constructor(private val mealsByBeersNetworkData
 
     private fun hasBeers() = beers.size > 0
 
-    private fun isNecessaryFetchMoreBeers(page: Int) =
-            (beers.size / page) == Constants.MAX_RESULTS_PER_PAGE
+    private fun isNecessaryFetchMoreBeers(page: Int): Boolean {
+        return (beers.size / page) == Constants.MAX_RESULTS_PER_PAGE
+    }
 }

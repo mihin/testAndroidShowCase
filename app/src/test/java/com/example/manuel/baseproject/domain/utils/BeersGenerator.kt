@@ -1,39 +1,39 @@
 package com.example.manuel.baseproject.domain.utils
 
-import com.example.manuel.baseproject.domain.model.BeerModel
+import com.example.manuel.baseproject.domain.model.BeerEntity
 
 object BeersGenerator {
 
     fun getUnsortedBeers() = listOf(
-            BeerModel(
+            BeerEntity(
                     1,
                     "BeerNameOne",
                     "BeerTaglineOne",
                     "urlImageOne",
                     87.0
             ),
-            BeerModel(
+            BeerEntity(
                     2,
                     "BeerNameTwo",
                     "BeerTaglineTwo",
                     "urlImageTwo",
                     5.0
             ),
-            BeerModel(
+            BeerEntity(
                     3,
                     "BeerNameThree",
                     "BeerTaglineThree",
                     "urlImageThree",
                     2.0
             ),
-            BeerModel(
+            BeerEntity(
                     4,
                     "BeerNameFour",
                     "BeerTaglineFour",
                     "urlImageFour",
                     63.0
             ),
-            BeerModel(
+            BeerEntity(
                     5,
                     "BeerNameFive",
                     "BeerTaglineFive",
@@ -43,35 +43,35 @@ object BeersGenerator {
     )
 
     fun getSortedBeers() = listOf(
-            BeerModel(
+            BeerEntity(
                     3,
                     "BeerNameThree",
                     "BeerTaglineThree",
                     "urlImageThree",
                     2.0
             ),
-            BeerModel(
+            BeerEntity(
                     2,
                     "BeerNameTwo",
                     "BeerTaglineTwo",
                     "urlImageTwo",
                     5.0
             ),
-            BeerModel(
+            BeerEntity(
                     5,
                     "BeerNameFive",
                     "BeerTaglineFive",
                     "urlImageFive",
                     18.0
             ),
-            BeerModel(
+            BeerEntity(
                     4,
                     "BeerNameFour",
                     "BeerTaglineFour",
                     "urlImageFour",
                     63.0
             ),
-            BeerModel(
+            BeerEntity(
                     1,
                     "BeerNameOne",
                     "BeerTaglineOne",

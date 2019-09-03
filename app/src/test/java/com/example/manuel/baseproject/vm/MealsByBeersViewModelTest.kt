@@ -2,7 +2,7 @@ package com.example.manuel.baseproject.vm
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.manuel.baseproject.commons.utils.dto.Result.Companion.success
-import com.example.manuel.baseproject.domain.model.BeerModel
+import com.example.manuel.baseproject.domain.model.BeerEntity
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
@@ -21,7 +21,7 @@ class MealsByBeersViewModelTest {
     @Test
     fun verifyLiveDataWhenResultIsSuccess() {
         runBlocking {
-            val beers = listOf<BeerModel>()
+            val beers = listOf<BeerEntity>()
             val result = success(beers)
 
             given(getBeersUseCase.execute()).willReturn(result)
