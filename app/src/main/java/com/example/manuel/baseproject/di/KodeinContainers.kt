@@ -3,7 +3,7 @@ package com.example.manuel.baseproject.di
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
 import com.example.manuel.baseproject.domain.MealsByBeersRepository
 import com.example.manuel.baseproject.repository.MealsByBeersRepositoryImpl
-import com.example.manuel.baseproject.datasource.MealsByBeersNetworkDatasource
+import com.example.manuel.baseproject.datasource.MealsByBeersNetworkDataSource
 import com.example.manuel.baseproject.datasource.retrofit.RetrofitConfiguration
 import com.example.manuel.baseproject.vm.MealsByBeersViewModel
 import com.github.salomonbrys.kodein.Kodein
@@ -18,7 +18,7 @@ class KodeinContainers {
         @ExperimentalCoroutinesApi
         val diBaseProject = Kodein {
             bind<RetrofitConfiguration>() with provider { RetrofitConfiguration() }
-            bind<MealsByBeersNetworkDatasource>() with provider { MealsByBeersNetworkDatasource(instance()) }
+            bind<MealsByBeersNetworkDataSource>() with provider { MealsByBeersNetworkDataSource(instance()) }
             bind<MealsByBeersRepository>() with provider { MealsByBeersRepositoryImpl(instance()) }
             bind<GetBeersUseCase>() with provider { GetBeersUseCase(instance()) }
             bind<MealsByBeersViewModel>() with provider { MealsByBeersViewModel(instance()) }

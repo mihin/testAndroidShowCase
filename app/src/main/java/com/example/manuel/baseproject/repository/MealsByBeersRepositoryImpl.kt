@@ -4,12 +4,12 @@ import com.example.manuel.baseproject.repository.constants.Constants
 import com.example.manuel.baseproject.commons.utils.dto.Result
 import com.example.manuel.baseproject.domain.MealsByBeersRepository
 import com.example.manuel.baseproject.domain.model.BeerModel
-import com.example.manuel.baseproject.datasource.MealsByBeersNetworkDatasource
+import com.example.manuel.baseproject.datasource.MealsByBeersNetworkDataSource
 import com.example.manuel.baseproject.repository.mapper.Mapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
-class MealsByBeersRepositoryImpl constructor(private val mealsByBeersNetworkDatasource: MealsByBeersNetworkDatasource) :
+class MealsByBeersRepositoryImpl constructor(private val mealsByBeersNetworkDataSource: MealsByBeersNetworkDataSource) :
         MealsByBeersRepository {
 
     private val beers = mutableListOf<BeerModel>()
@@ -21,7 +21,7 @@ class MealsByBeersRepositoryImpl constructor(private val mealsByBeersNetworkData
         do {
             page = getPageToCheckBeers(page)
 
-            mealsByBeersNetworkDatasource.getAllBeers(page.toString())
+            mealsByBeersNetworkDataSource.getAllBeers(page.toString())
                     .let {
                         Mapper.mapFrom(it).let { beerModelList ->
                             beerModelList.data?.forEach { beerModel ->

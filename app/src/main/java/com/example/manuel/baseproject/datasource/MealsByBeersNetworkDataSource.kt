@@ -10,7 +10,7 @@ import java.lang.Exception
 import com.example.manuel.baseproject.commons.utils.dto.Result
 
 @ExperimentalCoroutinesApi
-class MealsByBeersNetworkDatasource(private val retrofitConfiguration: RetrofitConfiguration) {
+class MealsByBeersNetworkDataSource(private val retrofitConfiguration: RetrofitConfiguration) {
 
     suspend fun getAllBeers(page: String): Result<List<BeerResponse>>? {
         var result: Result<List<BeerResponse>>? = Result.success(listOf())
