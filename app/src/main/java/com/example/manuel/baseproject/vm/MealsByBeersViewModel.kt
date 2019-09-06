@@ -3,9 +3,9 @@ package com.example.manuel.baseproject.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.manuel.baseproject.commons.utils.dto.Result
-import com.example.manuel.baseproject.commons.utils.enums.ResultType
-import com.example.manuel.baseproject.domain.model.BeerEntity
+import com.example.manuel.baseproject.commons.datatype.Result
+import com.example.manuel.baseproject.commons.datatype.ResultType
+import com.example.manuel.baseproject.domain.model.BeersEntity
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
 import com.example.manuel.baseproject.vm.mapper.Mapper
 import com.example.manuel.baseproject.vm.model.BeerUI
@@ -43,8 +43,8 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
         }
     }
 
-    private fun updateAppropriateLiveData(result: Result<List<BeerEntity>>) {
-        if (isResultSuccess(result)) {
+    private fun updateAppropriateLiveData(result: Result<BeersEntity>) {
+        if (isResultSuccess(result.resultType)) {
             onResultSuccess(result.data)
         } else {
             onResultError()
@@ -53,11 +53,12 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
         isLoadingLiveData(false)
     }
 
-    private fun isResultSuccess(result: Result<List<BeerEntity>>) =
-            result.resultType == ResultType.SUCCESS
+    private fun isResultSuccess(resultType: ResultType): Boolean{
+        return resultType == ResultType.SUCCESS
+    }
 
-    private fun onResultSuccess(beersEntity: List<BeerEntity>?) {
-        val beers = Mapper.mapFrom(beersEntity)
+    private fun onResultSuccess(beersEntity: BeersEntity?) {
+        val beers = Mapper.mapFrom(beersEntity?.beers)
 
         if (beers.isEmpty()) {
             areEmptyBeersLiveData.postValue(true)

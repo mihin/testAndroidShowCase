@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.manuel.baseproject.R
-import com.example.manuel.baseproject.vm.model.AbvType
+import com.example.manuel.baseproject.vm.model.AbvColorType
 import com.example.manuel.baseproject.vm.model.BeerUI
 import kotlinx.android.synthetic.main.item_list_beer.view.*
 
@@ -49,11 +49,11 @@ class BeersAdapter(private var beers: MutableList<BeerUI>, private val context: 
         val abvBackground = viewHolder.beerAbvTextView.background as GradientDrawable
 
         abvBackground.apply {
-            val abvType = beers[position].abvType
+            val abvType = beers[position].abvColorType
 
             when(abvType) {
-                AbvType.GREEN -> setColor(context.resources.getColor(R.color.green))
-                AbvType.ORANGE -> setColor(context.resources.getColor(R.color.orange))
+                AbvColorType.GREEN -> setColor(context.resources.getColor(R.color.green))
+                AbvColorType.ORANGE -> setColor(context.resources.getColor(R.color.orange))
                 else -> setColor(context.resources.getColor(R.color.red))
             }
         }

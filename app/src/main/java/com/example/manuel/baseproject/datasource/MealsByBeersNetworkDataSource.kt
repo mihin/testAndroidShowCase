@@ -7,7 +7,7 @@ import com.example.manuel.baseproject.datasource.retrofit.RetrofitConfiguration
 import kotlinx.coroutines.*
 import java.lang.Exception
 
-import com.example.manuel.baseproject.commons.utils.dto.Result
+import com.example.manuel.baseproject.commons.datatype.Result
 
 @ExperimentalCoroutinesApi
 class MealsByBeersNetworkDataSource(private val retrofitConfiguration: RetrofitConfiguration) {
@@ -30,10 +30,10 @@ class MealsByBeersNetworkDataSource(private val retrofitConfiguration: RetrofitC
                 request?.let {
                     if (it.isCompleted) result = Result.success(response)
                     else if (it.isCancelled) result =
-                            Result.error(Constants.NETWORK_DATASOURCE_ERROR_MESSAGE)
+                            Result.error(Constants.NETWORK_DATA_SOURCE_ERROR_MESSAGE)
                 }
             } catch (ex: Exception) {
-                result = Result.error(Constants.NETWORK_DATASOURCE_ERROR_MESSAGE)
+                result = Result.error(Constants.NETWORK_DATA_SOURCE_ERROR_MESSAGE)
             }
         }
 

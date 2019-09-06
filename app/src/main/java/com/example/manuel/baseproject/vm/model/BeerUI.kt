@@ -6,5 +6,5 @@ class BeerUI(
         val tagline: String,
         val image: String,
         val abv: Double,
-        val abvType: AbvType
+        val abvColorType: AbvColorType
 )

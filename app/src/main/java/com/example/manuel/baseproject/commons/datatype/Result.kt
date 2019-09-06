@@ -1,6 +1,4 @@
-package com.example.manuel.baseproject.commons.utils.dto
-
-import com.example.manuel.baseproject.commons.utils.enums.ResultType
+package com.example.manuel.baseproject.commons.datatype
 
 data class Result<out T>(
         var resultType: ResultType,
@@ -14,7 +12,7 @@ data class Result<out T>(
         }
 
         fun <T> error(message: String): Result<T> {
-            return Result(ResultType.ERROR,  message = message)
+            return Result(ResultType.ERROR, message = message)
         }
     }
 }

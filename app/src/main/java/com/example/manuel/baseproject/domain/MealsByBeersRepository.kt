@@ -1,9 +1,9 @@
 package com.example.manuel.baseproject.domain
 
-import com.example.manuel.baseproject.commons.utils.dto.Result
-import com.example.manuel.baseproject.domain.model.BeerEntity
+import com.example.manuel.baseproject.commons.datatype.Result
+import com.example.manuel.baseproject.domain.model.BeersEntity
 
 interface MealsByBeersRepository {
 
-    suspend fun getAllBeers(): Result<List<BeerEntity>>
+    suspend fun getAllBeers(): Result<BeersEntity>?
 }

@@ -1,7 +1,5 @@
 package com.example.manuel.baseproject.domain.model
 
-import com.example.manuel.baseproject.vm.model.AbvType
-
 class BeerEntity(
         val id: Int,
         val name: String,
@@ -9,11 +7,11 @@ class BeerEntity(
         val image: String,
         val abv: Double
 ) {
-    fun getAbvType(abv: Double): AbvType {
+    fun getAbvRange(abv: Double): AbvRangeType {
         return when {
-            abv < 5 -> AbvType.GREEN
-            abv >= 5 && abv < 8 -> AbvType.ORANGE
-            else -> AbvType.RED
+            abv < 5 -> AbvRangeType.LOW
+            abv >= 5 && abv < 8 -> AbvRangeType.NORMAL
+            else -> AbvRangeType.HIGH
         }
     }
 }

@@ -1,29 +1,32 @@
 package com.example.manuel.baseproject.domain.usecase
 
-import com.example.manuel.baseproject.commons.utils.dto.Result
-import com.example.manuel.baseproject.commons.utils.enums.ResultType
-import com.example.manuel.baseproject.domain.model.BeerEntity
+import com.example.manuel.baseproject.commons.datatype.Result
+import com.example.manuel.baseproject.commons.datatype.ResultType
 import com.example.manuel.baseproject.domain.MealsByBeersRepository
+import com.example.manuel.baseproject.domain.model.BeersEntity
 
 class GetBeersUseCase(private val mealsByBeersRepository: MealsByBeersRepository) {
 
-    suspend fun execute(): Result<List<BeerEntity>> {
-        val unSortedBeers: Result<List<BeerEntity>> = mealsByBeersRepository.getAllBeers()
-        var sortedBeers: Result<List<BeerEntity>> = unSortedBeers
+    suspend fun execute(): Result<BeersEntity> {
+        var beers: Result<BeersEntity> = Result.success(BeersEntity(listOf()))
 
-        val isResultSuccess = unSortedBeers.resultType == ResultType.SUCCESS
+        mealsByBeersRepository.getAllBeers()?.let { beersEntity ->
+            val resultType = beersEntity.resultType
 
-        if (isResultSuccess) {
-            val beersModel = getSortedAscendingBeers(unSortedBeers)
-            sortedBeers = Result.success(beersModel)
+            if (resultType == ResultType.SUCCESS) {
+                beersEntity.data?.let {
+                    val sortedBeers = getSortedAscendingBeers(beersEntity.data)
+                    beers = Result.success(sortedBeers)
+                }
+            }
         }
 
-        return sortedBeers
+        return beers
     }
 
-    private fun getSortedAscendingBeers(beers: Result<List<BeerEntity>>): List<BeerEntity>? {
-        return beers.data.let {
-            it?.sortedBy { it.abv }
-        }
+    private fun getSortedAscendingBeers(beersEntity: BeersEntity): BeersEntity {
+        return BeersEntity(
+                beersEntity.beers.sortedBy { it.abv }
+        )
     }
 }

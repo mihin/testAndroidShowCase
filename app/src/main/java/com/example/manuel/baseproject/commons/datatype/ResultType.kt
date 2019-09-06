@@ -1,4 +1,4 @@
-package com.example.manuel.baseproject.commons.utils.enums
+package com.example.manuel.baseproject.commons.datatype
 
 enum class ResultType {
     ERROR,
