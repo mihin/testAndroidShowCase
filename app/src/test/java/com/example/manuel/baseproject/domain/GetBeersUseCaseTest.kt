@@ -14,10 +14,10 @@ import org.junit.Assert
 import org.junit.Test
 
 class GetBeersUseCaseTest {
-
+/*
     private val mockMealsByBeersRepository: MealsByBeersRepository = mock()
     private val getBeersUseCase = GetBeersUseCase(mockMealsByBeersRepository)
-/*
+
     @Test
     fun <T> verifyResultWhenRepoMockReturnErrorState() {
         runBlocking {
