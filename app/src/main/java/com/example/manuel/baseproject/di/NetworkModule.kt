@@ -1,14 +1,19 @@
-package com.example.manuel.baseproject.datasource.retrofit
+package com.example.manuel.baseproject.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitConfiguration {
+object NetworkModule {
 
-    private val URL_BASE = "https://api.punkapi.com/v2/"
+    private const val URL_BASE = "https://api.punkapi.com/v2/"
 
-    fun getRetrofitInstance() = Retrofit.Builder()
+    val serviceModule = module {
+        single { provideRetrofitInstance() }
+    }
+
+    private fun provideRetrofitInstance(): Retrofit = Retrofit.Builder()
             .baseUrl(URL_BASE)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
