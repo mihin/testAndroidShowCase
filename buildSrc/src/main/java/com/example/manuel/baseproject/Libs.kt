@@ -23,17 +23,6 @@ object Libs {
         const val KOIN_ANDROID = "org.koin:koin-android:${Versions.DependencyInversion.KOIN}"
         const val KOIN_SCOPE_FEATURES = "org.koin:koin-androidx-scope:${Versions.DependencyInversion.KOIN}"
         const val KOIN_VIEWMODEL_FEATURES = "org.koin:koin-androidx-viewmodel:${Versions.DependencyInversion.KOIN}"
-
-
-        /*
-        *  // Koin for Android
-// Koin AndroidX Scope features
-implementation "org.koin:koin-androidx-scope:$koin_version"
-// Koin AndroidX ViewModel features
-implementation "org.koin:koin-androidx-viewmodel:$koin_version"
-// Koin AndroidX Experimental features
-implementation "org.koin:koin-androidx-ext:$koin_version"
-        * */
     }
 
     object Network {
