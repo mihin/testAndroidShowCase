@@ -19,6 +19,10 @@ object Libs {
     object DependencyInversion {
         const val KODEIN = "com.github.salomonbrys.kodein:kodein:${Versions.DependencyInversion.KODEIN}"
         const val KODEIN_ANDROID = "com.github.salomonbrys.kodein:kodein-android:${Versions.DependencyInversion.KODEIN}"
+
+        const val KOIN_ANDROID = "org.koin:koin-android:${Versions.DependencyInversion.KOIN}"
+        const val KOIN_SCOPE_FEATURES = "org.koin:koin-androidx-scope:${Versions.DependencyInversion.KOIN}"
+        const val KOIN_VIEWMODEL_FEATURES = "org.koin:koin-androidx-viewmodel:${Versions.DependencyInversion.KOIN}"
     }
 
     object Network {

@@ -2,7 +2,6 @@ package com.example.manuel.baseproject.datasource
 
 import com.example.manuel.baseproject.datasource.model.BeerResponse
 import com.example.manuel.baseproject.datasource.retrofit.BeersApiService
-import com.example.manuel.baseproject.datasource.retrofit.RetrofitConfiguration
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -10,7 +9,7 @@ import com.example.manuel.baseproject.commons.datatype.Result
 import com.example.manuel.baseproject.repository.constants.NetworkError
 
 @ExperimentalCoroutinesApi
-class MealsByBeersNetworkDataSource(private val retrofitConfiguration: RetrofitConfiguration) {
+class MealsByBeersNetworkDataSource(private val beersApiService: BeersApiService) {
 
     companion object {
         const val MAX_RESULTS_PER_PAGE: Int = 80
@@ -21,10 +20,7 @@ class MealsByBeersNetworkDataSource(private val retrofitConfiguration: RetrofitC
 
         withContext(Dispatchers.IO) {
             try {
-                val retrofitInstance = retrofitConfiguration.getRetrofitInstance()
-
-                val beersService = retrofitInstance.create(BeersApiService::class.java)
-                val request = beersService.getAllBeersAsync(
+                val request = beersApiService.getAllBeersAsync(
                         page,
                         MAX_RESULTS_PER_PAGE.toString()
                 )

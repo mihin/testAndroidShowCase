@@ -6,32 +6,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.manuel.baseproject.R
-import com.example.manuel.baseproject.di.KodeinContainers
 import com.example.manuel.baseproject.ui.adapterlist.BeersAdapter
 import com.example.manuel.baseproject.vm.MealsByBeersViewModel
 import com.example.manuel.baseproject.vm.model.BeerUI
-import com.github.salomonbrys.kodein.instance
-import com.github.salomonbrys.kodein.newInstance
 import kotlinx.android.synthetic.main.activity_beers_results.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @ExperimentalCoroutinesApi
 class BeersResultActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MealsByBeersViewModel
+    private val viewModel: MealsByBeersViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_beers_results)
 
-        initViewModel()
         observerLiveDatas()
-    }
-
-    private fun initViewModel() {
-        viewModel = KodeinContainers.diBaseProject.newInstance {
-            MealsByBeersViewModel(instance())
-        }
     }
 
     private fun observerLiveDatas() {
