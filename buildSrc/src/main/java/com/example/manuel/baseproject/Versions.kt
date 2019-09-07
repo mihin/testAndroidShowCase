@@ -12,7 +12,6 @@ object Versions {
     }
 
     object DependencyInversion {
-        const val KODEIN = "4.1.0"
         const val KOIN = "2.0.1"
     }
 
