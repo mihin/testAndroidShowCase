@@ -1,6 +1,6 @@
 package com.example.manuel.baseproject.repository
 
-import com.example.manuel.baseproject.repository.constants.Constants
+import com.example.manuel.baseproject.commons.Error
 import com.example.manuel.baseproject.commons.datatype.Result
 import com.example.manuel.baseproject.commons.datatype.ResultType
 import com.example.manuel.baseproject.domain.MealsByBeersRepository
@@ -8,6 +8,8 @@ import com.example.manuel.baseproject.domain.model.BeerEntity
 import com.example.manuel.baseproject.datasource.MealsByBeersNetworkDataSource
 import com.example.manuel.baseproject.datasource.model.BeerResponse
 import com.example.manuel.baseproject.domain.model.BeersEntity
+import com.example.manuel.baseproject.domain.model.BusinessErrorType
+import com.example.manuel.baseproject.repository.constants.NetworkError
 import com.example.manuel.baseproject.repository.mapper.Mapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -52,7 +54,7 @@ class MealsByBeersRepositoryImpl constructor(
     private fun hasBeers() = beers.size > 0
 
     private fun isNecessaryFetchMoreBeers(page: Int): Boolean {
-        return (beers.size / page) == Constants.MAX_RESULTS_PER_PAGE
+        return (beers.size / page) == MealsByBeersNetworkDataSource.MAX_RESULTS_PER_PAGE
     }
 
     private fun addAllBeersUntilLastPage(resultListBeerResponse: Result<List<BeerResponse>>) {
@@ -67,15 +69,15 @@ class MealsByBeersRepositoryImpl constructor(
         return if (resultListBeerResponse.resultType == ResultType.SUCCESS) {
             Result.success(BeersEntity(beers))
         } else {
-            if (hasNotMoreBeers(resultListBeerResponse.message)) {
+            if (hasNotMoreBeers(resultListBeerResponse.error)) {
                 Result.success(BeersEntity(beers))
             } else {
-                Result.error(Constants.NETWORK_DATA_SOURCE_ERROR_MESSAGE)
+                Result.error(BusinessErrorType.NETWORK_ERROR)
             }
         }
     }
 
-    private fun hasNotMoreBeers(message: String?): Boolean {
-        return beers.isNotEmpty() && message == Constants.NETWORK_DATA_SOURCE_ERROR_MESSAGE
+    private fun hasNotMoreBeers(error: Error?): Boolean {
+        return beers.isNotEmpty() && error == NetworkError.API_ERROR
     }
 }

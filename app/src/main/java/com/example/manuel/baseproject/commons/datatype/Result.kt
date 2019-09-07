@@ -1,9 +1,11 @@
 package com.example.manuel.baseproject.commons.datatype
 
+import com.example.manuel.baseproject.commons.Error
+
 data class Result<out T>(
         var resultType: ResultType,
         val data: T? = null,
-        val message: String? = null
+        val error: Error? = null
 ) {
 
     companion object {
@@ -11,8 +13,8 @@ data class Result<out T>(
             return Result(ResultType.SUCCESS, data)
         }
 
-        fun <T> error(message: String): Result<T> {
-            return Result(ResultType.ERROR, message = message)
+        fun <T> error(error: Error): Result<T> {
+            return Result(ResultType.ERROR, error = error)
         }
     }
 }

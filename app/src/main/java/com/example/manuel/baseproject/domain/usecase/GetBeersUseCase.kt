@@ -4,6 +4,7 @@ import com.example.manuel.baseproject.commons.datatype.Result
 import com.example.manuel.baseproject.commons.datatype.ResultType
 import com.example.manuel.baseproject.domain.MealsByBeersRepository
 import com.example.manuel.baseproject.domain.model.BeersEntity
+import com.example.manuel.baseproject.domain.model.BusinessErrorType
 
 class GetBeersUseCase(private val mealsByBeersRepository: MealsByBeersRepository) {
 
@@ -18,6 +19,8 @@ class GetBeersUseCase(private val mealsByBeersRepository: MealsByBeersRepository
                     val sortedBeers = getSortedAscendingBeers(beersEntity.data)
                     beers = Result.success(sortedBeers)
                 }
+            } else {
+                beers = Result.error(BusinessErrorType.NETWORK_ERROR)
             }
         }
 
