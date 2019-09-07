@@ -22,7 +22,7 @@ class BaseProjectApplication : Application() {
             modules(
                     listOf(
                             BaseProjectModule.mainModule,
-                            NetworkModule.serviceModule
+                            NetworkModule.retrofitModule
                     )
             )
         }

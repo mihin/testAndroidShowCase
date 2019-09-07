@@ -9,7 +9,7 @@ object NetworkModule {
 
     private const val URL_BASE = "https://api.punkapi.com/v2/"
 
-    val serviceModule = module {
+    val retrofitModule = module {
         single { provideRetrofitInstance() }
     }
 
