@@ -42,6 +42,10 @@ dependencies {
     implementation Libs.DependencyInversion.KODEIN
     implementation Libs.DependencyInversion.KODEIN_ANDROID
 
+    implementation Libs.DependencyInversion.KOIN_ANDROID
+    implementation Libs.DependencyInversion.KOIN_SCOPE_FEATURES
+    implementation Libs.DependencyInversion.KOIN_VIEWMODEL_FEATURES
+
     // Network
     implementation Libs.Network.GSON
     implementation Libs.Network.RETROFIT
