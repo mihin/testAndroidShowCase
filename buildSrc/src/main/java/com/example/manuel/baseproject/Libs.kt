@@ -36,6 +36,7 @@ object Libs {
         const val MOCKITO_INLINE = "org.mockito:mockito-inline:${Versions.Testing.MOCKITO_INLINE}"
         const val RUNNER = "androidx.test:runner:${Versions.Testing.RUNNER}"
         const val TRUTH = "com.google.truth:truth:${Versions.Testing.GOOGLE_TRUTH}"
+        const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.Testing.COROUTINES}"
     }
 
     object UI {

@@ -3,7 +3,7 @@ package com.example.manuel.baseproject.domain.utils
 import com.example.manuel.baseproject.domain.model.BeerEntity
 import com.example.manuel.baseproject.domain.model.BeersEntity
 
-object BeersGenerator {
+object DomainBeersGenerator {
 
     fun getUnsortedBeers(): BeersEntity {
         return BeersEntity(
