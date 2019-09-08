@@ -1,14 +1,15 @@
 package com.example.manuel.baseproject.repository.mapper
 
 import com.example.manuel.baseproject.commons.BaseMapper
+import com.example.manuel.baseproject.datasource.model.BeersApi
 import com.example.manuel.baseproject.domain.model.BeerEntity
-import com.example.manuel.baseproject.datasource.model.BeerResponse
 import com.example.manuel.baseproject.domain.model.BeersEntity
 
-object Mapper : BaseMapper<List<BeerResponse>?, BeersEntity> {
-    override fun mapFrom(type: List<BeerResponse>?): BeersEntity {
+object Mapper : BaseMapper<BeersApi, BeersEntity> {
+
+    override fun mapFrom(type: BeersApi?): BeersEntity {
         return BeersEntity(
-                type?.map {
+                type?.beers?.map {
                     BeerEntity(
                             id = it.id ?: -1,
                             name = it.name ?: "",
@@ -20,5 +21,4 @@ object Mapper : BaseMapper<List<BeerResponse>?, BeersEntity> {
         )
     }
 }
-
 

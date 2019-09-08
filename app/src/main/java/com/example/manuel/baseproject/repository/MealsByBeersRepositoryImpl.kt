@@ -6,7 +6,7 @@ import com.example.manuel.baseproject.commons.datatype.ResultType
 import com.example.manuel.baseproject.domain.MealsByBeersRepository
 import com.example.manuel.baseproject.domain.model.BeerEntity
 import com.example.manuel.baseproject.datasource.MealsByBeersNetworkDataSource
-import com.example.manuel.baseproject.datasource.model.BeerResponse
+import com.example.manuel.baseproject.datasource.model.BeersApi
 import com.example.manuel.baseproject.domain.model.BeersEntity
 import com.example.manuel.baseproject.domain.model.BusinessErrorType
 import com.example.manuel.baseproject.repository.constants.NetworkError
@@ -57,19 +57,19 @@ class MealsByBeersRepositoryImpl constructor(
         return (beers.size / page) == MealsByBeersNetworkDataSource.MAX_RESULTS_PER_PAGE
     }
 
-    private fun addAllBeersUntilLastPage(resultListBeerResponse: Result<List<BeerResponse>>) {
-        Mapper.mapFrom(resultListBeerResponse.data).let { beersEntity ->
+    private fun addAllBeersUntilLastPage(beersApiResult: Result<BeersApi>) {
+        Mapper.mapFrom(beersApiResult.data).let { beersEntity ->
             beersEntity.beers.forEach { beerEntity ->
                 beers.add(beerEntity)
             }
         }
     }
 
-    private fun initResult(resultListBeerResponse: Result<List<BeerResponse>>): Result<BeersEntity> {
-        return if (resultListBeerResponse.resultType == ResultType.SUCCESS) {
+    private fun initResult(beersApiResult: Result<BeersApi>): Result<BeersEntity> {
+        return if (beersApiResult.resultType == ResultType.SUCCESS) {
             Result.success(BeersEntity(beers))
         } else {
-            if (hasNotMoreBeers(resultListBeerResponse.error)) {
+            if (hasNotMoreBeers(beersApiResult.error)) {
                 Result.success(BeersEntity(beers))
             } else {
                 Result.error(BusinessErrorType.NETWORK_ERROR)
