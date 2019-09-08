@@ -97,7 +97,7 @@ class MealsByBeersViewModelTest {
         Assert.assertEquals(beersExpected, viewModel.beers.value?.isNotEmpty())
         Assert.assertEquals(isErrorExpected, viewModel.isError.value)
         Assert.assertEquals(areEmptyBeersExpected, viewModel.areEmptyBeers.value)
-        Assert.assertEquals(false, viewModel.isLoading.value)
+        Assert.assertEquals(EXPECTED_IS_LOADING_FALSE, viewModel.isLoading.value)
     }
 
     @Test
