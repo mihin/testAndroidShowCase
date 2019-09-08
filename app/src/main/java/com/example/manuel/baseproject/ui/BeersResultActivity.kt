@@ -22,10 +22,10 @@ class BeersResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_beers_results)
 
-        observerLiveDatas()
+        observerLiveData()
     }
 
-    private fun observerLiveDatas() {
+    private fun observerLiveData() {
         viewModel.beers.observe(this, Observer(::onBeersReceived))
         viewModel.isError.observe(this, Observer { onErrorReceived() })
         viewModel.areEmptyBeers.observe(this, Observer { onEmptyBeersReceived() })

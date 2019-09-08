@@ -29,6 +29,7 @@ object Versions {
         const val MOCKITO = "2.0.0"
         const val MOCKITO_INLINE = "2.13.0"
         const val RUNNER = "1.2.0-beta01"
+        const val COROUTINES = "1.3.1"
     }
 
     object UI {

@@ -59,6 +59,8 @@ dependencies {
     testImplementation Libs.Testing.MOCKITO
     testImplementation Libs.Testing.MOCKITO_INLINE
 
+    testImplementation Libs.Testing.COROUTINES
+
     // UI
     implementation Libs.UI.CARD_VIEW
     implementation Libs.UI.CONSTRAINT_LAYOUT

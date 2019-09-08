@@ -7,7 +7,7 @@ import kotlinx.coroutines.runBlocking
 import com.example.manuel.baseproject.commons.datatype.Result
 import com.example.manuel.baseproject.domain.model.BeersEntity
 import com.example.manuel.baseproject.domain.model.BusinessErrorType
-import com.example.manuel.baseproject.domain.utils.BeersGenerator
+import com.example.manuel.baseproject.domain.utils.DomainBeersGenerator
 import com.example.manuel.baseproject.repository.constants.NetworkError
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -48,10 +48,10 @@ class GetBeersUseCaseTest {
     @Test
     fun verifySortedAbvWhenRepoMockReturnUnsortedList() {
         runBlocking {
-            val result = Result.success(BeersGenerator.getUnsortedBeers())
+            val result = Result.success(DomainBeersGenerator.getUnsortedBeers())
             given(mockMealsByBeersRepository.getAllBeers()).willReturn(result)
 
-            val expectedResultBeers = Result.success(BeersGenerator.getSortedBeers()).data
+            val expectedResultBeers = Result.success(DomainBeersGenerator.getSortedBeers()).data
             val realResultBeers = getBeersUseCase.execute().data
 
             realResultBeers?.beers?.forEachIndexed { index, currentRealResult ->
