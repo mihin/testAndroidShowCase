@@ -1,7 +1,7 @@
 package com.example.manuel.baseproject.repository.mapper
 
 import com.example.manuel.baseproject.commons.BaseMapper
-import com.example.manuel.baseproject.datasource.model.BeersApi
+import com.example.manuel.baseproject.datasource.model.api.BeersApi
 import com.example.manuel.baseproject.domain.model.BeerEntity
 import com.example.manuel.baseproject.domain.model.BeersEntity
 

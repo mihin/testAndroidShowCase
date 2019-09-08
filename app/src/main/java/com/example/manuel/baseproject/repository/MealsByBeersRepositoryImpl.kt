@@ -6,7 +6,7 @@ import com.example.manuel.baseproject.commons.datatype.ResultType
 import com.example.manuel.baseproject.domain.MealsByBeersRepository
 import com.example.manuel.baseproject.domain.model.BeerEntity
 import com.example.manuel.baseproject.datasource.MealsByBeersNetworkDataSource
-import com.example.manuel.baseproject.datasource.model.BeersApi
+import com.example.manuel.baseproject.datasource.model.api.BeersApi
 import com.example.manuel.baseproject.domain.model.BeersEntity
 import com.example.manuel.baseproject.domain.model.BusinessErrorType
 import com.example.manuel.baseproject.repository.constants.NetworkError

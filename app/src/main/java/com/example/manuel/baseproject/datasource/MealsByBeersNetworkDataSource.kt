@@ -1,13 +1,12 @@
 package com.example.manuel.baseproject.datasource
 
-import com.example.manuel.baseproject.datasource.model.BeerResponse
 import com.example.manuel.baseproject.datasource.retrofit.BeersApiService
 import kotlinx.coroutines.*
 import java.lang.Exception
 
 import com.example.manuel.baseproject.commons.datatype.Result
 import com.example.manuel.baseproject.datasource.mapper.Mapper
-import com.example.manuel.baseproject.datasource.model.BeersApi
+import com.example.manuel.baseproject.datasource.model.api.BeersApi
 import com.example.manuel.baseproject.repository.constants.NetworkError
 
 @ExperimentalCoroutinesApi
