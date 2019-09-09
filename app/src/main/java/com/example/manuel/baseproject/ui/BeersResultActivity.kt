@@ -4,6 +4,7 @@ import androidx.lifecycle.Observer
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.ui.adapterlist.BeersAdapter
@@ -45,6 +46,8 @@ class BeersResultActivity : AppCompatActivity() {
             beersAdapter.updateAdapter(it.toMutableList())
 
             recycler_view_beers.setHasFixedSize(true)
+            recycler_view_beers.layoutAnimation =
+                    AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_fall_down)
         }
     }
 
