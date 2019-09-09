@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.view.animation.LayoutAnimationController
 import androidx.appcompat.app.AppCompatActivity
 import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.ui.adapterlist.BeersAdapter
