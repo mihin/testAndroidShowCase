@@ -20,12 +20,12 @@ class GetBeersUseCaseTest {
     private val getBeersUseCase = GetBeersUseCase(mockMealsByBeersRepository)
 
     @Test
-    fun <T> verifyBusinessErrorWhenRepoMockReturnNetworkError() {
+    fun verifyBusinessErrorWhenRepoMockReturnNetworkError() {
         runBlocking {
             given(mockMealsByBeersRepository.getAllBeers())
                     .willReturn(Result.error(NetworkError.API_ERROR))
 
-            val expectedResult = Result.error<T>(BusinessErrorType.NETWORK_ERROR).error
+            val expectedResult = Result.error<BusinessErrorType>(BusinessErrorType.NETWORK_ERROR).error
             val realResult = getBeersUseCase.execute().error
 
             Assert.assertEquals(expectedResult, realResult)
