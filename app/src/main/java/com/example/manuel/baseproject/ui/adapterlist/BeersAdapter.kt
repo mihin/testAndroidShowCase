@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.vm.model.AbvColorType
@@ -51,10 +52,10 @@ class BeersAdapter(private var beers: MutableList<BeerUI>, private val context: 
         abvBackground.apply {
             val abvType = beers[position].abvColorType
 
-            when(abvType) {
-                AbvColorType.GREEN -> setColor(context.resources.getColor(R.color.green))
-                AbvColorType.ORANGE -> setColor(context.resources.getColor(R.color.orange))
-                else -> setColor(context.resources.getColor(R.color.red))
+            when (abvType) {
+                AbvColorType.GREEN -> setColor(ContextCompat.getColor(context, R.color.green))
+                AbvColorType.ORANGE -> setColor(ContextCompat.getColor(context, R.color.orange))
+                else -> setColor(ContextCompat.getColor(context, R.color.red))
             }
         }
     }
