@@ -7,7 +7,7 @@ import com.example.manuel.baseproject.commons.datatype.Result
 import com.example.manuel.baseproject.commons.datatype.ResultType
 import com.example.manuel.baseproject.domain.model.BeersEntity
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
-import com.example.manuel.baseproject.vm.mapper.Mapper
+import com.example.manuel.baseproject.vm.mapper.ViewModelMapper
 import com.example.manuel.baseproject.vm.model.BeerUI
 import kotlinx.coroutines.*
 
@@ -37,9 +37,7 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
     private fun handleBeersLoad() {
         isLoadingLiveData(true)
         viewModelScope.launch {
-            updateAppropriateLiveData(
-                    getMealsByBeersUseCase.execute()
-            )
+            updateAppropriateLiveData(getMealsByBeersUseCase.execute())
         }
     }
 
@@ -53,12 +51,12 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
         isLoadingLiveData(false)
     }
 
-    private fun isResultSuccess(resultType: ResultType): Boolean{
+    private fun isResultSuccess(resultType: ResultType): Boolean {
         return resultType == ResultType.SUCCESS
     }
 
     private fun onResultSuccess(beersEntity: BeersEntity?) {
-        val beers = Mapper.mapFrom(beersEntity?.beers)
+        val beers = ViewModelMapper.EntityToUI.map(beersEntity?.beers)
 
         if (beers.isEmpty()) {
             areEmptyBeersLiveData.postValue(true)

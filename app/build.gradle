@@ -69,4 +69,6 @@ dependencies {
     kapt Libs.UI.GLIDE_COMPILER
 
     implementation Libs.UI.RECYCLER_VIEW
+
+    implementation Libs.UI.SUPPORT_DESIGN
 }

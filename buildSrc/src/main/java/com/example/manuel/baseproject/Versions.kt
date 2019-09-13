@@ -37,5 +37,6 @@ object Versions {
         const val CONSTRAINT_LAYOUT = "1.1.3"
         const val GLIDE = "4.9.0"
         const val RECYCLER_VIEW = "1.1.0-alpha05"
+        const val SUPPORT_DESIGN = "27.1.1"
     }
 }

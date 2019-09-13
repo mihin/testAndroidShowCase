@@ -3,7 +3,6 @@ package com.example.manuel.baseproject.vm
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.manuel.baseproject.commons.datatype.Result
 import com.example.manuel.baseproject.domain.model.BeersEntity
-import com.example.manuel.baseproject.domain.model.BusinessErrorType
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
 import com.example.manuel.baseproject.domain.utils.DomainBeersGenerator
 import com.nhaarman.mockitokotlin2.given
@@ -111,7 +110,7 @@ class MealsByBeersViewModelTest {
 
     private fun givenErrorResult() {
         runBlockingTest {
-            val result: Result<BeersEntity> = Result.error(BusinessErrorType.NETWORK_ERROR)
+            val result: Result<BeersEntity> = Result.error(BusinessErrors.NETWORK_ERROR)
             given(mockGetBeersUseCase.execute()).willReturn(result)
         }
     }

@@ -5,9 +5,10 @@ import kotlinx.coroutines.*
 import java.lang.Exception
 
 import com.example.manuel.baseproject.commons.datatype.Result
-import com.example.manuel.baseproject.datasource.mapper.Mapper
+import com.example.manuel.baseproject.commons.exceptions.CancelledFetchDataException
+import com.example.manuel.baseproject.datasource.mapper.NetworkMapper
 import com.example.manuel.baseproject.datasource.model.api.BeersApi
-import com.example.manuel.baseproject.repository.constants.NetworkError
+import com.example.manuel.baseproject.datasource.model.response.BeerResponse
 
 @ExperimentalCoroutinesApi
 class MealsByBeersNetworkDataSource(private val beersApiService: BeersApiService) {
@@ -21,20 +22,18 @@ class MealsByBeersNetworkDataSource(private val beersApiService: BeersApiService
 
         withContext(Dispatchers.IO) {
             try {
-                val request = beersApiService.getAllBeersAsync(
-                        page,
-                        MAX_RESULTS_PER_PAGE.toString()
-                )
+                val request =
+                        beersApiService.getAllBeersAsync(page, MAX_RESULTS_PER_PAGE.toString())
 
-                val response = request?.await()
+                val response: List<BeerResponse>? = request?.await()
 
                 request?.let {
-                    if (it.isCompleted) result = Result.success(Mapper.mapFrom(response))
-                    else if (it.isCancelled) result =
-                            Result.error(NetworkError.API_ERROR)
+                    if (it.isCompleted) result = Result.success(NetworkMapper.ResponseToApiMapper.map(response))
+                    else if (it.isCancelled) result = Result.error(CancelledFetchDataException())
                 }
             } catch (ex: Exception) {
-                result = Result.error(NetworkError.API_ERROR)
+                result = Result.error(NetworkMapper.ExceptionToErrorMapper.map(ex))
+
             }
         }
 

@@ -6,7 +6,6 @@ import com.nhaarman.mockitokotlin2.mock
 import kotlinx.coroutines.runBlocking
 import com.example.manuel.baseproject.commons.datatype.Result
 import com.example.manuel.baseproject.domain.model.BeersEntity
-import com.example.manuel.baseproject.domain.model.BusinessErrorType
 import com.example.manuel.baseproject.domain.utils.DomainBeersGenerator
 import com.example.manuel.baseproject.repository.constants.NetworkError
 import com.nhaarman.mockitokotlin2.times
@@ -25,7 +24,7 @@ class GetBeersUseCaseTest {
             given(mockMealsByBeersRepository.getAllBeers())
                     .willReturn(Result.error(NetworkError.API_ERROR))
 
-            val expectedResult = Result.error<BusinessErrorType>(BusinessErrorType.NETWORK_ERROR).error
+            val expectedResult = Result.error<BusinessErrors>(BusinessErrors.NETWORK_ERROR).error
             val realResult = getBeersUseCase.execute().error
 
             Assert.assertEquals(expectedResult, realResult)

@@ -1,11 +1,11 @@
 package com.example.manuel.baseproject.commons.datatype
 
-import com.example.manuel.baseproject.commons.Error
+import java.lang.Exception
 
 data class Result<out T>(
         var resultType: ResultType,
         val data: T? = null,
-        val error: Error? = null
+        val error: Exception? = null
 ) {
 
     companion object {
@@ -13,7 +13,7 @@ data class Result<out T>(
             return Result(ResultType.SUCCESS, data)
         }
 
-        fun <T> error(error: Error): Result<T> {
+        fun <T> error(error: Exception? = null): Result<T> {
             return Result(ResultType.ERROR, error = error)
         }
     }
