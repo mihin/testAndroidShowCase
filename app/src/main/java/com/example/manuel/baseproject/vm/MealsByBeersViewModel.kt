@@ -34,7 +34,7 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
         handleBeersLoad()
     }
 
-    private fun handleBeersLoad() {
+    fun handleBeersLoad() {
         isLoadingLiveData(true)
         viewModelScope.launch {
             updateAppropriateLiveData(getMealsByBeersUseCase.execute())

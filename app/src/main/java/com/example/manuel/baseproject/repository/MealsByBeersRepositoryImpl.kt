@@ -3,7 +3,7 @@ package com.example.manuel.baseproject.repository
 import com.example.manuel.baseproject.commons.datatype.Result
 import com.example.manuel.baseproject.commons.datatype.ResultType
 import com.example.manuel.baseproject.commons.exceptions.NetworkConnectionException
-import com.example.manuel.baseproject.commons.exceptions.datasource.BadRequestException
+import com.example.manuel.baseproject.commons.exceptions.BadRequestException
 import com.example.manuel.baseproject.domain.MealsByBeersRepository
 import com.example.manuel.baseproject.domain.model.BeerEntity
 import com.example.manuel.baseproject.datasource.MealsByBeersNetworkDataSource

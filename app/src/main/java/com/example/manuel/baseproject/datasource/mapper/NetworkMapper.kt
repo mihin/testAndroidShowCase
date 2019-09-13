@@ -3,7 +3,7 @@ package com.example.manuel.baseproject.datasource.mapper
 import com.example.manuel.baseproject.commons.BaseMapper
 import com.example.manuel.baseproject.commons.exceptions.GenericNetworkException
 import com.example.manuel.baseproject.commons.exceptions.NetworkConnectionException
-import com.example.manuel.baseproject.commons.exceptions.datasource.BadRequestException
+import com.example.manuel.baseproject.commons.exceptions.BadRequestException
 import com.example.manuel.baseproject.datasource.model.api.BeerApi
 import com.example.manuel.baseproject.datasource.model.response.BeerResponse
 import com.example.manuel.baseproject.datasource.model.api.BeersApi

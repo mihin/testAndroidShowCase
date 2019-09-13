@@ -1,20 +1,18 @@
 package com.example.manuel.baseproject.ui
 
-import android.app.Activity
+import android.content.DialogInterface
 import androidx.lifecycle.Observer
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.ui.adapterlist.BeersAdapter
 import com.example.manuel.baseproject.vm.MealsByBeersViewModel
 import com.example.manuel.baseproject.vm.model.BeerUI
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_beers_results.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -57,16 +55,15 @@ class BeersResultActivity : AppCompatActivity() {
     }
 
     private fun onErrorReceived() {
-        val activityViewGroup = findViewById<ViewGroup>(R.id.activity_beers_view_group)
-        val view: View = layoutInflater.inflate(R.layout.activity_beers_results, activityViewGroup)
-        Snackbar.make(
-                view,
-                resources.getString(R.string.network_connection_error_message),
-                Snackbar.LENGTH_LONG
-        ).apply {
-            setAction(R.string.network_connection_error_action) { Log.i("test", "click snackbar") }
-            show()
-        }
+        AlertDialog.Builder(this)
+                .setTitle(R.string.network_connection_error_title)
+                .setCancelable(false)
+                .setNegativeButton(R.string.network_connection_error_cancel) { _, _ ->
+                    this.finish()
+                }
+                .setPositiveButton(R.string.network_connection_error_action) { _, _ ->
+                    viewModel.handleBeersLoad()
+                }.show()
     }
 
     private fun onEmptyBeersReceived() {
