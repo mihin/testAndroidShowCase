@@ -47,8 +47,6 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
         } else {
             onResultError()
         }
-
-        isLoadingLiveData(false)
     }
 
     private fun isResultSuccess(resultType: ResultType): Boolean {
@@ -63,10 +61,20 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
         } else {
             beersLiveData.postValue(beers)
         }
+
+        isLoadingLiveData(false)
     }
 
+    /**
+     *  The delay is to avoid the screen flash between the transition from AlertDialog to ProgressBar
+     * */
     private fun onResultError() {
-        isErrorLiveData.postValue(true)
+        viewModelScope.launch {
+            delay(300)
+            isLoadingLiveData(false)
+        }.invokeOnCompletion {
+            isErrorLiveData.postValue(true)
+        }
     }
 
     private fun isLoadingLiveData(isLoading: Boolean) {

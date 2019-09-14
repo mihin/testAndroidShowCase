@@ -1,9 +1,7 @@
 package com.example.manuel.baseproject.ui
 
-import android.content.DialogInterface
 import androidx.lifecycle.Observer
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -14,7 +12,7 @@ import com.example.manuel.baseproject.ui.adapterlist.BeersAdapter
 import com.example.manuel.baseproject.vm.MealsByBeersViewModel
 import com.example.manuel.baseproject.vm.model.BeerUI
 import kotlinx.android.synthetic.main.activity_beers_results.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @ExperimentalCoroutinesApi
@@ -59,7 +57,7 @@ class BeersResultActivity : AppCompatActivity() {
                 .setTitle(R.string.network_connection_error_title)
                 .setCancelable(false)
                 .setNegativeButton(R.string.network_connection_error_cancel) { _, _ ->
-                    this.finish()
+                    finish()
                 }
                 .setPositiveButton(R.string.network_connection_error_action) { _, _ ->
                     viewModel.handleBeersLoad()
