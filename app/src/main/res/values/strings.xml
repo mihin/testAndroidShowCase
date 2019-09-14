@@ -4,15 +4,8 @@
     <string name="abv">%1$s º</string>
     <string name="activity_main_search_button">Disabled search button</string>
 
-    <!-- Activity meals selector -->
-    <string name="activity_meals_selector_search_title">Title fake - Qué cerveza te puedo recomendar</string>
-
-    <string name="activity_meals_selector_vegetables">Vegetables</string>
-    <string name="activity_meals_selector_pork">Pork</string>
-    <string name="activity_meals_selector_beef">Beef</string>
-    <string name="activity_meals_selector_chicken">Chicken</string>
-    <string name="activity_meals_selector_all">Show all beers</string>
-
-    <string name="activity_meals_selector_search_button">Search</string>
+    <string name="network_connection_error_title">Network error</string>
+    <string name="network_connection_error_cancel">Cancel</string>
+    <string name="network_connection_error_action">Try again!</string>
 
 </resources>

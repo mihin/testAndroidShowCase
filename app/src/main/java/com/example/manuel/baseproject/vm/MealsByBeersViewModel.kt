@@ -7,7 +7,7 @@ import com.example.manuel.baseproject.commons.datatype.Result
 import com.example.manuel.baseproject.commons.datatype.ResultType
 import com.example.manuel.baseproject.domain.model.BeersEntity
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
-import com.example.manuel.baseproject.vm.mapper.Mapper
+import com.example.manuel.baseproject.vm.mapper.ViewModelMapper
 import com.example.manuel.baseproject.vm.model.BeerUI
 import kotlinx.coroutines.*
 
@@ -34,12 +34,10 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
         handleBeersLoad()
     }
 
-    private fun handleBeersLoad() {
+    fun handleBeersLoad() {
         isLoadingLiveData(true)
         viewModelScope.launch {
-            updateAppropriateLiveData(
-                    getMealsByBeersUseCase.execute()
-            )
+            updateAppropriateLiveData(getMealsByBeersUseCase.execute())
         }
     }
 
@@ -49,26 +47,34 @@ class MealsByBeersViewModel(private val getMealsByBeersUseCase: GetBeersUseCase)
         } else {
             onResultError()
         }
-
-        isLoadingLiveData(false)
     }
 
-    private fun isResultSuccess(resultType: ResultType): Boolean{
+    private fun isResultSuccess(resultType: ResultType): Boolean {
         return resultType == ResultType.SUCCESS
     }
 
     private fun onResultSuccess(beersEntity: BeersEntity?) {
-        val beers = Mapper.mapFrom(beersEntity?.beers)
+        val beers = ViewModelMapper.EntityToUI.map(beersEntity?.beers)
 
         if (beers.isEmpty()) {
             areEmptyBeersLiveData.postValue(true)
         } else {
             beersLiveData.postValue(beers)
         }
+
+        isLoadingLiveData(false)
     }
 
+    /**
+     *  The delay is to avoid the screen flash between the transition from AlertDialog to ProgressBar
+     * */
     private fun onResultError() {
-        isErrorLiveData.postValue(true)
+        viewModelScope.launch {
+            delay(300)
+            isLoadingLiveData(false)
+        }.invokeOnCompletion {
+            isErrorLiveData.postValue(true)
+        }
     }
 
     private fun isLoadingLiveData(isLoading: Boolean) {

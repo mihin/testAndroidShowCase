@@ -45,5 +45,6 @@ object Libs {
         const val GLIDE = "com.github.bumptech.glide:glide:${Versions.UI.GLIDE}"
         const val GLIDE_COMPILER = "com.github.bumptech.glide:compiler:${Versions.UI.GLIDE}"
         const val RECYCLER_VIEW = "androidx.recyclerview:recyclerview:${Versions.UI.RECYCLER_VIEW}"
+        const val SUPPORT_DESIGN = "com.android.support:design:${Versions.UI.SUPPORT_DESIGN}"
     }
 }

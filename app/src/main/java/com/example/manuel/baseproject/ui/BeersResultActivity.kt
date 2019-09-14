@@ -5,13 +5,14 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.ui.adapterlist.BeersAdapter
 import com.example.manuel.baseproject.vm.MealsByBeersViewModel
 import com.example.manuel.baseproject.vm.model.BeerUI
 import kotlinx.android.synthetic.main.activity_beers_results.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @ExperimentalCoroutinesApi
@@ -52,7 +53,15 @@ class BeersResultActivity : AppCompatActivity() {
     }
 
     private fun onErrorReceived() {
-        // do something
+        AlertDialog.Builder(this)
+                .setTitle(R.string.network_connection_error_title)
+                .setCancelable(false)
+                .setNegativeButton(R.string.network_connection_error_cancel) { _, _ ->
+                    finish()
+                }
+                .setPositiveButton(R.string.network_connection_error_action) { _, _ ->
+                    viewModel.handleBeersLoad()
+                }.show()
     }
 
     private fun onEmptyBeersReceived() {

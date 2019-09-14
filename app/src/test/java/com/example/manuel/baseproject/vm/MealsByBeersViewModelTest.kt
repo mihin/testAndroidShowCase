@@ -3,7 +3,6 @@ package com.example.manuel.baseproject.vm
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.manuel.baseproject.commons.datatype.Result
 import com.example.manuel.baseproject.domain.model.BeersEntity
-import com.example.manuel.baseproject.domain.model.BusinessErrorType
 import com.example.manuel.baseproject.domain.usecase.GetBeersUseCase
 import com.example.manuel.baseproject.domain.utils.DomainBeersGenerator
 import com.nhaarman.mockitokotlin2.given
@@ -13,6 +12,7 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.*
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import java.lang.Exception
 
 /**
  *  https://codelabs.developers.google.com/codelabs/android-testing/#7
@@ -59,7 +59,11 @@ class MealsByBeersViewModelTest {
     fun verifyIsErrorLiveDataIsTrueWhenResultIsError() {
         mainCoroutineRule.runBlockingTest {
             givenErrorResult()
+
+            mainCoroutineRule.pauseDispatcher()
             whenViewModelHandleLoadBeers()
+            mainCoroutineRule.resumeDispatcher()
+
             thenAssertLiveData(isErrorExpected = true)
         }
     }
@@ -111,7 +115,7 @@ class MealsByBeersViewModelTest {
 
     private fun givenErrorResult() {
         runBlockingTest {
-            val result: Result<BeersEntity> = Result.error(BusinessErrorType.NETWORK_ERROR)
+            val result: Result<BeersEntity> = Result.error(Exception())
             given(mockGetBeersUseCase.execute()).willReturn(result)
         }
     }
