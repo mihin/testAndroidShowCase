@@ -9,7 +9,7 @@
     android:paddingBottom="8dp"
     android:paddingEnd="8dp"
     android:paddingStart="8dp"
-    tools:context=".ui.BeersResultActivity">
+    tools:context=".home.ui.HomeActivity">
 
     <include
         android:id="@+id/main_activity_spinner"

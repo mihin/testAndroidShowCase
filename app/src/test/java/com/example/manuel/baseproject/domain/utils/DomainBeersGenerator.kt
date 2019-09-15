@@ -1,7 +1,7 @@
 package com.example.manuel.baseproject.domain.utils
 
-import com.example.manuel.baseproject.domain.model.BeerEntity
-import com.example.manuel.baseproject.domain.model.BeersEntity
+import com.example.manuel.baseproject.home.domain.model.BeerEntity
+import com.example.manuel.baseproject.home.domain.model.BeersEntity
 
 object DomainBeersGenerator {
 

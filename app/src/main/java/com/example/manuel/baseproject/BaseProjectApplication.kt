@@ -1,7 +1,7 @@
 package com.example.manuel.baseproject
 
 import android.app.Application
-import com.example.manuel.baseproject.di.BaseProjectModule
+import com.example.manuel.baseproject.home.di.HomeModule
 import com.example.manuel.baseproject.di.NetworkModule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.ext.koin.androidContext
@@ -21,7 +21,7 @@ class BaseProjectApplication : Application() {
             androidContext(this@BaseProjectApplication)
             modules(
                     listOf(
-                            BaseProjectModule.mainModule,
+                            HomeModule.mainModule,
                             NetworkModule.retrofitModule
                     )
             )
