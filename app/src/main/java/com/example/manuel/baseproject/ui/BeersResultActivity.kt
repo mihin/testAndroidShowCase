@@ -48,7 +48,7 @@ class BeersResultActivity : AppCompatActivity() {
     }
 
     /**
-     *  This method recover the UI state when the device has a memory error,
+     *  If is necessary, this method recover the UI state when the device has a memory error,
      *  so the UI will be restored.
      *
      *  The first time there is not data in the adapter and maybe the device has a network error,
