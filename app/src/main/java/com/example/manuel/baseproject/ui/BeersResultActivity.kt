@@ -16,10 +16,8 @@ import com.example.manuel.baseproject.ui.model.BeersAdapterModel
 import com.example.manuel.baseproject.vm.MealsByBeersViewModel
 import com.example.manuel.baseproject.vm.model.BeerUI
 import kotlinx.android.synthetic.main.activity_beers_results.*
-import kotlinx.coroutines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@ExperimentalCoroutinesApi
 class BeersResultActivity : AppCompatActivity() {
 
     companion object {
