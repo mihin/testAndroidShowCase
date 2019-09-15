@@ -61,6 +61,15 @@ class NetworkMapperTest {
         )
     }
 
+    private fun getHttpException(code: Int): HttpException {
+        return HttpException(
+                Response.error<Exception>(
+                        code,
+                        ResponseBody.create(null, "")
+                )
+        )
+    }
+
     @Test
     fun verifySystemExceptionToCustomExceptionMapperWhenExceptionIsDifferent400MustBeGenericNetworkException() {
         val httpException: HttpException = mock()
@@ -71,20 +80,10 @@ class NetworkMapperTest {
         )
     }
 
-    private fun getHttpException(code: Int): HttpException {
-        return HttpException(
-                Response.error<Exception>(
-                        code,
-                        ResponseBody.create(null, "")
-                )
-        )
-    }
-
     private fun verifyMapperSystemExceptionToCustomExceptionWhenSystemExceptionIs(
             givenException: Exception,
             expectedException: Exception
     ) {
-
         val expectedResult: Exception = expectedException
         val realResult: Exception = NetworkMapper.SystemExceptionToCustomExceptionMapper.map(givenException)
 
