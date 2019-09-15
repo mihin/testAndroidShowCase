@@ -12,11 +12,10 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.manuel.baseproject.R
-import com.example.manuel.baseproject.vm.model.AbvColorType
-import com.example.manuel.baseproject.vm.model.BeerUI
+import com.example.manuel.baseproject.ui.model.BeerAdapterModel
 import kotlinx.android.synthetic.main.item_list_beer.view.*
 
-class BeersAdapter(private var beers: MutableList<BeerUI>, private val context: Context) :
+class BeersAdapter(private var beers: List<BeerAdapterModel>, private val context: Context) :
         RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -42,30 +41,20 @@ class BeersAdapter(private var beers: MutableList<BeerUI>, private val context: 
                     .override(200, 300)
                     .into(beerImageTextView)
 
-            setBackgroundAbv(position, this)
+
+            val backgroundColor = ContextCompat.getColor(context, beers.get(position).abvColor)
+            (beerAbvTextView.background as GradientDrawable).setColor(backgroundColor)
         }
     }
 
-    private fun setBackgroundAbv(position: Int, viewHolder: ViewHolder) {
-        val abvBackground = viewHolder.beerAbvTextView.background as GradientDrawable
-
-        abvBackground.apply {
-            val abvType = beers[position].abvColorType
-
-            when (abvType) {
-                AbvColorType.GREEN -> setColor(ContextCompat.getColor(context, R.color.green))
-                AbvColorType.ORANGE -> setColor(ContextCompat.getColor(context, R.color.orange))
-                else -> setColor(ContextCompat.getColor(context, R.color.red))
-            }
-        }
-    }
-
-    fun updateAdapter(updatedList: List<BeerUI>) {
+    fun updateAdapter(updatedList: List<BeerAdapterModel>) {
         val result = DiffUtil.calculateDiff(BeersDiffCallback(this.beers, updatedList))
 
         this.beers = updatedList.toMutableList()
         result.dispatchUpdatesTo(this)
     }
+
+    fun getBeers(): List<BeerAdapterModel> = beers
 }
 
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
