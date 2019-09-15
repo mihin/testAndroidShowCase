@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.manuel.baseproject.vm
+package com.example.manuel.baseproject.home.vm
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

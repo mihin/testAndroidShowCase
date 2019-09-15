@@ -1,4 +1,4 @@
-package com.example.manuel.baseproject.domain.utils
+package com.example.manuel.baseproject.home.domain.utils
 
 import com.example.manuel.baseproject.home.domain.model.BeerEntity
 import com.example.manuel.baseproject.home.domain.model.BeersEntity

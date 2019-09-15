@@ -27,7 +27,7 @@ class NetworkMapper {
         }
     }
 
-    object ExceptionToErrorMapper : BaseMapper<Exception, Exception> {
+    object SystemExceptionToCustomExceptionMapper : BaseMapper<Exception, Exception> {
         override fun map(type: Exception?): Exception {
             return when (type) {
                 is IOException -> NetworkConnectionException()

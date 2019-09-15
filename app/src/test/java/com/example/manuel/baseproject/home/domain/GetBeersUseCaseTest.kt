@@ -1,4 +1,4 @@
-package com.example.manuel.baseproject.domain
+package com.example.manuel.baseproject.home.domain
 
 import com.example.manuel.baseproject.home.domain.usecase.GetBeersUseCase
 import com.nhaarman.mockitokotlin2.given
@@ -7,8 +7,7 @@ import kotlinx.coroutines.runBlocking
 import com.example.manuel.baseproject.home.commons.datatype.Result
 import com.example.manuel.baseproject.home.commons.exceptions.NetworkConnectionException
 import com.example.manuel.baseproject.home.domain.model.BeersEntity
-import com.example.manuel.baseproject.domain.utils.DomainBeersGenerator
-import com.example.manuel.baseproject.home.domain.HomeRepository
+import com.example.manuel.baseproject.home.domain.utils.DomainBeersGenerator
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert
