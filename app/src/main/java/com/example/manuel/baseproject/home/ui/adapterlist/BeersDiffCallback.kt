@@ -1,7 +1,7 @@
 package com.example.manuel.baseproject.home.ui.adapterlist
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.manuel.baseproject.home.ui.model.BeerAdapterModel
+import com.example.manuel.baseproject.home.ui.adapterlist.model.BeerAdapterModel
 
 class BeersDiffCallback(private val oldBeers: List<BeerAdapterModel>,
                         private val newBeers: List<BeerAdapterModel>) : DiffUtil.Callback() {

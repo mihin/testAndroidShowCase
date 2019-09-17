@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.home.ui.adapterlist.BeersAdapter
 import com.example.manuel.baseproject.home.ui.mapper.BeerUIMapper
-import com.example.manuel.baseproject.home.ui.model.BeerAdapterModel
-import com.example.manuel.baseproject.home.ui.model.BeersAdapterModel
+import com.example.manuel.baseproject.home.ui.adapterlist.model.BeerAdapterModel
+import com.example.manuel.baseproject.home.ui.adapterlist.model.BeersAdapterModel
 import com.example.manuel.baseproject.home.vm.HomeViewModel
 import com.example.manuel.baseproject.home.vm.model.BeerUI
 import kotlinx.android.synthetic.main.activity_beers_results.*

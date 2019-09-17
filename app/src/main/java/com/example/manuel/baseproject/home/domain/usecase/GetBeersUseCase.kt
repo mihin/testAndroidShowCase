@@ -2,15 +2,15 @@ package com.example.manuel.baseproject.home.domain.usecase
 
 import com.example.manuel.baseproject.home.commons.datatype.Result
 import com.example.manuel.baseproject.home.commons.datatype.ResultType
-import com.example.manuel.baseproject.home.domain.HomeRepository
+import com.example.manuel.baseproject.home.domain.BeersRepository
 import com.example.manuel.baseproject.home.domain.model.BeersEntity
 
-class GetBeersUseCase(private val homeRepository: HomeRepository) {
+class GetBeersUseCase(private val beersRepository: BeersRepository) {
 
     suspend fun execute(): Result<BeersEntity> {
         var beers: Result<BeersEntity> = Result.success(BeersEntity(listOf()))
 
-        homeRepository.getAllBeers()?.let { beersEntity ->
+        beersRepository.getAllBeers()?.let { beersEntity ->
             val resultType = beersEntity.resultType
 
             if (resultType == ResultType.SUCCESS) {

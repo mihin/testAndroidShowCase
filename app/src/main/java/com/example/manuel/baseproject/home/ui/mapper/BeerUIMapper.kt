@@ -2,7 +2,7 @@ package com.example.manuel.baseproject.home.ui.mapper
 
 import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.home.commons.BaseMapper
-import com.example.manuel.baseproject.home.ui.model.BeerAdapterModel
+import com.example.manuel.baseproject.home.ui.adapterlist.model.BeerAdapterModel
 import com.example.manuel.baseproject.home.vm.model.AbvColorType
 import com.example.manuel.baseproject.home.vm.model.BeerUI
 

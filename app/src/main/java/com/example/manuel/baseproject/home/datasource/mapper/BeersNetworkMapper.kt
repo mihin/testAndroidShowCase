@@ -11,7 +11,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.net.UnknownHostException
 
-class NetworkMapper {
+class BeersNetworkMapper {
 
     object ResponseToApiMapper : BaseMapper<List<BeerResponse>, BeersApi> {
         override fun map(type: List<BeerResponse>?): BeersApi {
@@ -27,7 +27,7 @@ class NetworkMapper {
         }
     }
 
-    object ExceptionToErrorMapper : BaseMapper<Exception, Exception> {
+    object ExceptionMapper : BaseMapper<Exception, Exception> {
         override fun map(type: Exception?): Exception {
             return when (type) {
                 is IOException -> NetworkConnectionException()

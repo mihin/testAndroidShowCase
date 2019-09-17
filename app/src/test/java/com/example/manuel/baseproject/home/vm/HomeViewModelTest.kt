@@ -1,11 +1,10 @@
-package com.example.manuel.baseproject.vm
+package com.example.manuel.baseproject.home.vm
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.manuel.baseproject.home.commons.datatype.Result
 import com.example.manuel.baseproject.home.domain.model.BeersEntity
 import com.example.manuel.baseproject.home.domain.usecase.GetBeersUseCase
-import com.example.manuel.baseproject.domain.utils.DomainBeersGenerator
-import com.example.manuel.baseproject.home.vm.HomeViewModel
+import com.example.manuel.baseproject.home.domain.utils.DomainBeersGenerator
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
 import kotlinx.coroutines.*

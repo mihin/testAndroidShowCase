@@ -4,18 +4,18 @@ import com.example.manuel.baseproject.home.commons.datatype.Result
 import com.example.manuel.baseproject.home.commons.datatype.ResultType
 import com.example.manuel.baseproject.home.commons.exceptions.NetworkConnectionException
 import com.example.manuel.baseproject.home.commons.exceptions.BadRequestException
-import com.example.manuel.baseproject.home.domain.HomeRepository
+import com.example.manuel.baseproject.home.domain.BeersRepository
 import com.example.manuel.baseproject.home.domain.model.BeerEntity
 import com.example.manuel.baseproject.home.datasource.BeersNetworkDataSource
 import com.example.manuel.baseproject.home.datasource.model.api.BeersApi
 import com.example.manuel.baseproject.home.domain.model.BeersEntity
-import com.example.manuel.baseproject.home.repository.mapper.RepositoryMapper
+import com.example.manuel.baseproject.home.repository.mapper.BeersRepositoryMapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
-class HomeRepositoryImpl constructor(
+class BeersRepositoryImpl constructor(
         private val beersNetworkDataSource: BeersNetworkDataSource
-) : HomeRepository {
+) : BeersRepository {
 
     private val beers = mutableListOf<BeerEntity>()
 
@@ -56,7 +56,7 @@ class HomeRepositoryImpl constructor(
     }
 
     private fun addAllBeersUntilLastPage(beersApiResult: Result<BeersApi>) {
-        RepositoryMapper.ApiToEntityMapper.map(beersApiResult.data).let { beersEntity ->
+        BeersRepositoryMapper.ApiToEntityMapper.map(beersApiResult.data).let { beersEntity ->
             beersEntity.beers.forEach { beerEntity ->
                 beers.add(beerEntity)
             }
