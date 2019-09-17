@@ -1,5 +1,6 @@
 package com.example.manuel.baseproject.home.datasource
 
+import com.example.manuel.baseproject.home.commons.datasource.handleNetworkException
 import com.example.manuel.baseproject.home.datasource.retrofit.BeersApiService
 import kotlinx.coroutines.*
 import java.lang.Exception
@@ -32,7 +33,7 @@ class BeersNetworkDataSource(private val beersApiService: BeersApiService) {
                     else if (it.isCancelled) result = Result.error(CancelledFetchDataException())
                 }
             } catch (ex: Exception) {
-                result = Result.error(BeersNetworkMapper.ExceptionMapper.map(ex))
+                result = Result.error(ex.handleNetworkException())
 
             }
         }

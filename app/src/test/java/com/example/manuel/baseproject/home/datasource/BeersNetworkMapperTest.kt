@@ -4,6 +4,7 @@ import com.example.manuel.baseproject.home.commons.exceptions.BadRequestExceptio
 import com.example.manuel.baseproject.home.commons.exceptions.GenericNetworkException
 import com.example.manuel.baseproject.home.commons.exceptions.NetworkConnectionException
 import com.example.manuel.baseproject.home.datasource.mapper.BeersNetworkMapper
+import com.example.manuel.baseproject.home.datasource.mapper.handleNetworkException
 import com.example.manuel.baseproject.home.datasource.model.api.BeersApi
 import com.example.manuel.baseproject.home.datasource.utils.DataSourceBeersGenerator
 import com.nhaarman.mockitokotlin2.mock
@@ -85,7 +86,7 @@ class BeersNetworkMapperTest {
             expectedException: Exception
     ) {
         val expectedResult: Exception = expectedException
-        val realResult: Exception = BeersNetworkMapper.ExceptionMapper.map(givenException)
+        val realResult: Exception = givenException.handleNetworkException()
 
         Assert.assertEquals(expectedResult::class, realResult::class)
     }
