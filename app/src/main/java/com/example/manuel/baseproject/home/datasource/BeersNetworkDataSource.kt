@@ -32,7 +32,7 @@ class BeersNetworkDataSource(private val beersApiService: BeersApiService) {
                     else if (it.isCancelled) result = Result.error(CancelledFetchDataException())
                 }
             } catch (ex: Exception) {
-                result = Result.error(BeersNetworkMapper.SystemExceptionToCustomExceptionMapper.map(ex))
+                result = Result.error(BeersNetworkMapper.ExceptionMapper.map(ex))
 
             }
         }

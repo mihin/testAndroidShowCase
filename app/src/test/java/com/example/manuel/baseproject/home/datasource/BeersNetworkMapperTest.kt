@@ -85,7 +85,7 @@ class BeersNetworkMapperTest {
             expectedException: Exception
     ) {
         val expectedResult: Exception = expectedException
-        val realResult: Exception = BeersNetworkMapper.SystemExceptionToCustomExceptionMapper.map(givenException)
+        val realResult: Exception = BeersNetworkMapper.ExceptionMapper.map(givenException)
 
         Assert.assertEquals(expectedResult::class, realResult::class)
     }

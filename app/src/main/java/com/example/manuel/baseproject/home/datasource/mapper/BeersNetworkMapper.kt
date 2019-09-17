@@ -27,7 +27,7 @@ class BeersNetworkMapper {
         }
     }
 
-    object SystemExceptionToCustomExceptionMapper : BaseMapper<Exception, Exception> {
+    object ExceptionMapper : BaseMapper<Exception, Exception> {
         override fun map(type: Exception?): Exception {
             return when (type) {
                 is IOException -> NetworkConnectionException()
