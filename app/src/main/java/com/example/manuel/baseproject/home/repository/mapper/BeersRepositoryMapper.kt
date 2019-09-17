@@ -5,7 +5,7 @@ import com.example.manuel.baseproject.home.datasource.model.api.BeersApi
 import com.example.manuel.baseproject.home.domain.model.BeerEntity
 import com.example.manuel.baseproject.home.domain.model.BeersEntity
 
-class RepositoryMapper {
+class BeersRepositoryMapper {
 
     object ApiToEntityMapper: BaseMapper<BeersApi, BeersEntity> {
         override fun map(type: BeersApi?): BeersEntity {

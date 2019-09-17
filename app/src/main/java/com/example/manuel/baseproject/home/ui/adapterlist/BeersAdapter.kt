@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.manuel.baseproject.R
-import com.example.manuel.baseproject.home.ui.model.BeerAdapterModel
+import com.example.manuel.baseproject.home.ui.adapterlist.model.BeerAdapterModel
 import kotlinx.android.synthetic.main.item_list_beer.view.*
 
 class BeersAdapter(private var beers: List<BeerAdapterModel>, private val context: Context) :

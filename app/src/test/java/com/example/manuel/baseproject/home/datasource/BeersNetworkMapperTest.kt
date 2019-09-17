@@ -3,7 +3,7 @@ package com.example.manuel.baseproject.home.datasource
 import com.example.manuel.baseproject.home.commons.exceptions.BadRequestException
 import com.example.manuel.baseproject.home.commons.exceptions.GenericNetworkException
 import com.example.manuel.baseproject.home.commons.exceptions.NetworkConnectionException
-import com.example.manuel.baseproject.home.datasource.mapper.NetworkMapper
+import com.example.manuel.baseproject.home.datasource.mapper.BeersNetworkMapper
 import com.example.manuel.baseproject.home.datasource.model.api.BeersApi
 import com.example.manuel.baseproject.home.datasource.utils.DataSourceBeersGenerator
 import com.nhaarman.mockitokotlin2.mock
@@ -15,14 +15,14 @@ import retrofit2.Response
 import java.io.IOException
 import java.net.UnknownHostException
 
-class NetworkMapperTest {
+class BeersNetworkMapperTest {
 
     @Test
     fun verifyMapperFromResponseModelToApiModel() {
         val givenBeersResponse = DataSourceBeersGenerator.getBeersResponse()
 
         val expectedResult: BeersApi = DataSourceBeersGenerator.getBeersApi()
-        val realResult: BeersApi = NetworkMapper.ResponseToApiMapper.map(givenBeersResponse)
+        val realResult: BeersApi = BeersNetworkMapper.ResponseToApiMapper.map(givenBeersResponse)
 
         Assert.assertEquals(expectedResult, realResult)
     }
@@ -85,7 +85,7 @@ class NetworkMapperTest {
             expectedException: Exception
     ) {
         val expectedResult: Exception = expectedException
-        val realResult: Exception = NetworkMapper.SystemExceptionToCustomExceptionMapper.map(givenException)
+        val realResult: Exception = BeersNetworkMapper.SystemExceptionToCustomExceptionMapper.map(givenException)
 
         Assert.assertEquals(expectedResult::class, realResult::class)
     }

@@ -1,4 +1,4 @@
-package com.example.manuel.baseproject.home.ui.model
+package com.example.manuel.baseproject.home.ui.adapterlist.model
 
 import android.os.Parcel
 import android.os.Parcelable

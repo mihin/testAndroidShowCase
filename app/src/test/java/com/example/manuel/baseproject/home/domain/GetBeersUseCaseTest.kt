@@ -16,13 +16,13 @@ import java.lang.Exception
 
 class GetBeersUseCaseTest {
 
-    private val mockHomeRepository: HomeRepository = mock()
-    private val getBeersUseCase = GetBeersUseCase(mockHomeRepository)
+    private val mockBeersRepository: BeersRepository = mock()
+    private val getBeersUseCase = GetBeersUseCase(mockBeersRepository)
 
     @Test
     fun verifyBusinessErrorWhenRepoMockReturnNetworkError() {
         runBlocking {
-            given(mockHomeRepository.getAllBeers())
+            given(mockBeersRepository.getAllBeers())
                     .willReturn(Result.error(NetworkConnectionException()))
 
             val expectedResult = Result.error<Exception>(NetworkConnectionException()).error
@@ -36,7 +36,7 @@ class GetBeersUseCaseTest {
     fun verifyResultWhenRepoMockReturnSuccessState() {
         runBlocking {
             val result = Result.success(BeersEntity(listOf()))
-            given(mockHomeRepository.getAllBeers()).willReturn(result)
+            given(mockBeersRepository.getAllBeers()).willReturn(result)
 
             val expectedResult = Result.success(BeersEntity(listOf()))
             val realResult = getBeersUseCase.execute()
@@ -49,7 +49,7 @@ class GetBeersUseCaseTest {
     fun verifySortedAbvWhenRepoMockReturnUnsortedList() {
         runBlocking {
             val result = Result.success(DomainBeersGenerator.getUnsortedBeers())
-            given(mockHomeRepository.getAllBeers()).willReturn(result)
+            given(mockBeersRepository.getAllBeers()).willReturn(result)
 
             val expectedResultBeers = Result.success(DomainBeersGenerator.getSortedBeers()).data
             val realResultBeers = getBeersUseCase.execute().data
@@ -66,12 +66,12 @@ class GetBeersUseCaseTest {
     @Test
     fun verifyUseCaseCallRepository() {
         runBlocking {
-            given(mockHomeRepository.getAllBeers())
+            given(mockBeersRepository.getAllBeers())
                     .willReturn(Result.success(BeersEntity(listOf())))
 
             getBeersUseCase.execute()
 
-            verify(mockHomeRepository, times(1)).getAllBeers()
+            verify(mockBeersRepository, times(1)).getAllBeers()
         }
     }
 }
