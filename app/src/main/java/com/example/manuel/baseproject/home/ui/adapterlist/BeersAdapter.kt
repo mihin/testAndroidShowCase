@@ -42,7 +42,7 @@ class BeersAdapter(private var beers: List<BeerAdapterModel>, private val contex
                     .into(beerImageTextView)
 
 
-            val backgroundColor = ContextCompat.getColor(context, beers.get(position).abvColor)
+            val backgroundColor = ContextCompat.getColor(context, beers[position].abvColor)
             (beerAbvTextView.background as GradientDrawable).setColor(backgroundColor)
         }
     }
@@ -53,8 +53,6 @@ class BeersAdapter(private var beers: List<BeerAdapterModel>, private val contex
         this.beers = updatedList.toMutableList()
         result.dispatchUpdatesTo(this)
     }
-
-    fun getBeers(): List<BeerAdapterModel> = beers
 }
 
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
