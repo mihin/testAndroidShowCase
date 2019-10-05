@@ -19,11 +19,13 @@ class BeersAdapter(private val context: Context) : RecyclerView.Adapter<ViewHold
 
     private var beers: List<BeerAdapterModel>? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(
-                    LayoutInflater.from(context).inflate(R.layout.item_list_beer, parent, false)
-            )
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(
+                LayoutInflater
+                        .from(context)
+                        .inflate(R.layout.item_list_beer, parent, false)
+        )
+    }
 
     override fun getItemCount(): Int {
         var itemCount = 0
