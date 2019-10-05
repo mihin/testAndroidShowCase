@@ -15,9 +15,10 @@ import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.home.ui.adapterlist.model.BeerAdapterModel
 import kotlinx.android.synthetic.main.item_list_beer.view.*
 
-// TODO Inject context
-class BeersAdapter(private var beers: List<BeerAdapterModel>, private val context: Context) :
+class BeersAdapter(private val context: Context) :
         RecyclerView.Adapter<ViewHolder>() {
+
+    private lateinit var beers: List<BeerAdapterModel>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder(
@@ -53,6 +54,10 @@ class BeersAdapter(private var beers: List<BeerAdapterModel>, private val contex
 
         this.beers = updatedList.toMutableList()
         result.dispatchUpdatesTo(this)
+    }
+
+    fun setData(beers: List<BeerAdapterModel>) {
+        this.beers = beers
     }
 }
 

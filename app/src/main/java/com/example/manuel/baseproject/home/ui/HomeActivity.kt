@@ -15,6 +15,7 @@ import com.example.manuel.baseproject.home.ui.adapterlist.model.BeerAdapterModel
 import com.example.manuel.baseproject.home.vm.HomeViewModel
 import com.example.manuel.baseproject.home.vm.model.BeerUI
 import kotlinx.android.synthetic.main.activity_beers_results.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
@@ -24,6 +25,8 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private val viewModel: HomeViewModel by viewModel()
+
+    private val beersAdapter: BeersAdapter by inject()
 
     private var recyclerView: RecyclerView? = null
 
@@ -65,7 +68,7 @@ class HomeActivity : AppCompatActivity() {
     private fun populateRecyclerView(beersAdapterModel: List<BeerAdapterModel>) {
         recyclerView?.layoutManager = LinearLayoutManager(this)
 
-        val beersAdapter = BeersAdapter(beersAdapterModel, this)
+        beersAdapter.setData(beersAdapterModel)
         recyclerView?.adapter = beersAdapter
         beersAdapter.updateAdapter(beersAdapterModel)
 
