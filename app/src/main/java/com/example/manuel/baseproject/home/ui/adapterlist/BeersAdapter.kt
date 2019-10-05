@@ -15,10 +15,9 @@ import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.home.ui.adapterlist.model.BeerAdapterModel
 import kotlinx.android.synthetic.main.item_list_beer.view.*
 
-class BeersAdapter(private val context: Context) :
-        RecyclerView.Adapter<ViewHolder>() {
+class BeersAdapter(private val context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
-    private lateinit var beers: List<BeerAdapterModel>
+    private var beers: List<BeerAdapterModel>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder(
@@ -26,34 +25,44 @@ class BeersAdapter(private val context: Context) :
             )
 
 
-    override fun getItemCount(): Int = beers.size
+    override fun getItemCount(): Int {
+        var itemCount = 0
+
+        beers?.let { itemCount = it.size }
+
+        return itemCount
+    }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.apply {
-            val abv = beers[position].abv.toString()
-            val formattedAbv: String = context.resources.getString(R.string.abv, abv)
+            beers?.let {
+                val abv = it[position].abv.toString()
+                val formattedAbv: String = context.resources.getString(R.string.abv, abv)
 
-            beerAbvTextView.text = formattedAbv
-            beerNameTextView.text = beers[position].name
-            beerTaglineTextView.text = beers[position].tagline
+                beerAbvTextView.text = formattedAbv
+                beerNameTextView.text = it[position].name
+                beerTaglineTextView.text = it[position].tagline
 
-            Glide.with(context)
-                    .load(beers[position].image)
-                    .placeholder(R.drawable.ic_close_black)
-                    .override(200, 300)
-                    .into(beerImageTextView)
+                Glide.with(context)
+                        .load(it[position].image)
+                        .placeholder(R.drawable.ic_close_black)
+                        .override(200, 300)
+                        .into(beerImageTextView)
 
 
-            val backgroundColor = ContextCompat.getColor(context, beers[position].abvColor)
-            (beerAbvTextView.background as GradientDrawable).setColor(backgroundColor)
+                val backgroundColor = ContextCompat.getColor(context, it[position].abvColor)
+                (beerAbvTextView.background as GradientDrawable).setColor(backgroundColor)
+            }
         }
     }
 
     fun updateAdapter(updatedList: List<BeerAdapterModel>) {
-        val result = DiffUtil.calculateDiff(BeersDiffCallback(this.beers, updatedList))
+        beers?.let {
+            val result = DiffUtil.calculateDiff(BeersDiffCallback(it, updatedList))
 
-        this.beers = updatedList.toMutableList()
-        result.dispatchUpdatesTo(this)
+            this.beers = updatedList.toMutableList()
+            result.dispatchUpdatesTo(this)
+        }
     }
 
     fun setData(beers: List<BeerAdapterModel>) {
