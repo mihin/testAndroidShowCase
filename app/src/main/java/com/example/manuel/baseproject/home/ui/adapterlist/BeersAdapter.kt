@@ -15,6 +15,7 @@ import com.example.manuel.baseproject.R
 import com.example.manuel.baseproject.home.ui.adapterlist.model.BeerAdapterModel
 import kotlinx.android.synthetic.main.item_list_beer.view.*
 
+// TODO Inject context
 class BeersAdapter(private var beers: List<BeerAdapterModel>, private val context: Context) :
         RecyclerView.Adapter<ViewHolder>() {
 
